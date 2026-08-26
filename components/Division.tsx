@@ -351,9 +351,15 @@ function MarqueeRow({
 
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      {/* edge fade agar logo terlihat "menghilang" di tepi layar */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#07080a] to-transparent md:w-40" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#07080a] to-transparent md:w-40" />
+      {/* edge fade agar logo terlihat "menghilang" di tepi layar — pakai var(--color-page) supaya ikut tema light/dark */}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-40"
+        style={{ background: 'linear-gradient(to right, var(--color-page), transparent)' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-40"
+        style={{ background: 'linear-gradient(to left, var(--color-page), transparent)' }}
+      />
 
       <div
         className="flex w-max"
