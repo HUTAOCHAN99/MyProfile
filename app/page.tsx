@@ -3,11 +3,11 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import BackToTop from '../components/BackToTop'
-import Benefit from '../components/Benefit'
 import Contact from '../components/Contact'
 import Division from '../components/Division'
 import Footer from '../components/Footer'
 import ActivityComponent from '../components/Activity'
+import Experience from '../components/Experience'
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <Division />
-        <Benefit />
+        <Experience />
         <ActivityComponent />
         <Contact />
       </main>

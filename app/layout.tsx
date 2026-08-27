@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 // TODO: ganti title & description sesuai identitas Anda
 export const metadata = {
-  title: 'Nama Anda | Portfolio',
+  title: 'AZAN DEV',
   description: 'Portfolio pribadi Zhofir - Fullstack Developer',
 
   icons: {

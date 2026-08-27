@@ -41,7 +41,7 @@ type Tech = {
   color: string
 }
 
-const ROW_1: Tech[] = [
+export const ROW_1: Tech[] = [
   {
     id: 'nextjs',
     name: 'Next.js',
@@ -124,7 +124,7 @@ const ROW_1: Tech[] = [
   },
 ]
 
-const ROW_2: Tech[] = [
+export const ROW_2: Tech[] = [
   {
     id: 'flutter',
     name: 'Flutter',

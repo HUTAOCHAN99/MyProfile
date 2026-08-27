@@ -151,7 +151,7 @@ export default function Header() {
                 e.preventDefault();
                 handleMenuLinkClick("#home");
               }}
-              className="text-xl md:text-2xl font-bold text-heading focus:outline-none focus:ring-2 focus:ring-primary rounded"
+              className="text-xl md:text-2xl font-bold text-heading focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
             >
               <img
                 src="/assets/logo_AZAN.webp"

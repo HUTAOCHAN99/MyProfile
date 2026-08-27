@@ -1,16 +1,19 @@
 // components/Activity.tsx
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaCalendar,
   FaCode,
   FaLaptopCode,
 } from "react-icons/fa";
+import { experiences } from "./Experience";
+import { ROW_1, ROW_2 } from "./Division";
 
 // Data statis untuk proyek - TODO: ganti dengan proyek Anda sendiri
 const activities = [
   {
     id: "1",
-    title: "Nama Proyek 1",
+    title: "MyProfile - Personal Portfolio",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
     image_url: "/images/project-1.jpg",
     status: "active",
@@ -19,7 +22,7 @@ const activities = [
   },
   {
     id: "2",
-    title: "Nama Proyek 2",
+    title: "Sistem Informasi Madrasah Diniyah Nurul Huda Kebondalem",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
     image_url: "/images/project-2.jpg",
     status: "active",
@@ -28,7 +31,7 @@ const activities = [
   },
   {
     id: "3",
-    title: "Nama Proyek 3",
+    title: "AgemasenBot",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
     image_url: "/images/project-3.jpg",
     status: "active",
@@ -37,31 +40,58 @@ const activities = [
   },
   {
     id: "4",
-    title: "Nama Proyek 4",
+    title: "Sampah Desa",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
     image_url: "/images/project-4.jpg",
-    status: "active",
-    category: "Open Source",
-    order_index: 4
-  },
-  {
-    id: "5",
-    title: "Nama Proyek 5",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
-    image_url: "/images/project-5.jpg",
     status: "active",
     category: "Freelance",
     order_index: 5
   },
   {
-    id: "6",
-    title: "Nama Proyek 6",
+    id: "5",
+    title: "Plant Monitoring",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
-    image_url: "/images/project-6.jpg",
+    image_url: "/images/project-5.jpg",
     status: "active",
     category: "Personal Project",
     order_index: 6
-  }
+  },
+  {
+    id: "6",
+    title: "Al-Khawarizmi Website",
+    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    image_url: "/images/project-7.jpg",
+    status: "active",
+    category: "Personal Project",
+    order_index: 6
+  },
+  {
+    id: "7",
+    title: "KanaApp",
+    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    image_url: "/images/project-8.jpg",
+    status: "active",
+    category: "Personal Project",
+    order_index: 6
+  },
+  {
+    id: "8",
+    title: "Purewill",
+    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    image_url: "/images/project-10.jpg",
+    status: "active",
+    category: "Personal Project",
+    order_index: 6
+  },
+  {
+    id: "9",
+    title: "Website Tour Mega",
+    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    image_url: "/images/project-9.jpg",
+    status: "active",
+    category: "Personal Project",
+    order_index: 6
+  },
 ];
 
 // Filter aktivitas aktif dan urutkan berdasarkan order_index
@@ -69,20 +99,22 @@ const activeActivities = activities
   .filter(activity => activity.status === "active")
   .sort((a, b) => a.order_index - b.order_index);
 
-// Data statis untuk statistik - TODO: ganti dengan angka pencapaian Anda
+const technologyCount = ROW_1.length + ROW_2.length;
+
+// Angka mengikuti data yang ditampilkan di portfolio.
 const stats = [
   {
-    number: `${activities.length}+`,
-    label: "Proyek Selesai",
+    number: `${activeActivities.length}`,
+    label: "Proyek Tercatat",
     icon: <FaLaptopCode className="text-primary text-2xl" />,
   },
   {
-    number: "X+",
-    label: "Tahun Pengalaman",
+    number: `${experiences.length}`,
+    label: "Pengalaman Tercatat",
     icon: <FaCalendar className="text-primary text-2xl" />,
   },
   {
-    number: "Y+",
+    number: `${technologyCount}`,
     label: "Teknologi Dikuasai",
     icon: <FaCode className="text-primary text-2xl" />,
   },
@@ -126,6 +158,16 @@ export default function Activity() {
                       </svg>
                       <p className="text-muted text-sm">Project thumbnail</p>
                     </div>
+                    <Image
+                      src={activity.image_url}
+                      alt={`Thumbnail ${activity.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                      onError={(event) => {
+                        event.currentTarget.style.display = "none";
+                      }}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-page/80 via-transparent to-transparent"></div>
                     <div className="absolute bottom-4 left-4">
                       <h3 className="text-xl font-semibold text-heading">

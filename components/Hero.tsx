@@ -35,8 +35,8 @@ const person: Person = {
     instagram: "https://www.instagram.com/ahmad_zhofir_a_nayif",
     linkedin: "https://www.linkedin.com/in/username",
   },
-  bio: "Fullstack Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Laravel.",
-  introduction: "Mahasiswa Informatika yang aktif dalam pengembangan aplikasi web dan mobile dengan fokus pada user experience.",
+  bio: "Fullstack Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Flutter",
+  introduction: "Sebagai seorang Fullstack Developer, saya memadukan logika backend yang solid dengan antarmuka yang intuitif untuk menciptakan aplikasi web dan mobile yang berpusat pada kepuasan pengguna.",
 };
 
 export default function Hero() {
