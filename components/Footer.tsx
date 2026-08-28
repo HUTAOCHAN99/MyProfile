@@ -19,14 +19,14 @@ export default function Footer() {
           {/* Social Links - ganti dengan akun Anda */}
           <div className="flex space-x-6 mb-6 md:mb-0">
             <a
-              href="https://github.com/username"
+              href="https://github.com/HUTAOCHAN99"
               target="_blank"
               className="text-muted hover:text-heading text-2xl transition duration-300"
             >
               <FaGithub />
             </a>
             <a
-              href="https://www.instagram.com/username"
+              href="https://www.instagram.com/ahmad_zhofir_a_nayif"
               target="_blank"
               className="text-muted hover:text-heading text-2xl transition duration-300"
             >

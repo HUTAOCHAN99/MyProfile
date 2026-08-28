@@ -1,4 +1,7 @@
 // components/Activity.tsx
+'use client';
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -121,6 +124,8 @@ const stats = [
 ];
 
 export default function Activity() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section id="project" className="py-16 bg-page">
       <div className="container mx-auto px-4">
@@ -137,8 +142,11 @@ export default function Activity() {
 
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {activeActivities.map((activity) => (
-              <div key={activity.id} className="group">
+            {activeActivities.map((activity, index) => (
+              <div
+                key={activity.id}
+                className={`group ${index >= 3 && !isExpanded ? "hidden" : ""}`}
+              >
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition duration-300 bg-surface h-full flex flex-col hover:translate-y-[-4px] transition-transform duration-300">
                   {/* Thumbnail Container */}
                   <div className="relative h-48 md:h-56 overflow-hidden bg-surface-2">
@@ -224,6 +232,18 @@ export default function Activity() {
               </div>
             ))}
           </div>
+
+          {activeActivities.length > 3 && (
+            <div className="mt-8 text-center">
+              <button
+                type="button"
+                onClick={() => setIsExpanded((expanded) => !expanded)}
+                className="bg-surface hover:bg-surface-2 text-heading font-medium py-3 px-6 rounded-lg border border-border-strong hover:border-primary transition duration-300"
+              >
+                {isExpanded ? "Tampilkan Lebih Sedikit" : "Lihat Semua Proyek"}
+              </button>
+            </div>
+          )}
 
           {/* Stats Section */}
           <div className="mt-16 pt-8 border-t border-border-subtle">

@@ -191,10 +191,10 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-heading mb-1">
-                    Location
+                    Lokasi
                   </h4>
                   <p className="text-body">
-                    Kota, Provinsi, Indonesia
+                    Sleman, Daerah Istimewa Yogyakarta, Indonesia
                   </p>
                 </div>
               </div>
@@ -208,7 +208,7 @@ export default function Contact() {
                     Email
                   </h4>
                   <a href="mailto:email@anda.com" className="text-body hover:text-primary transition duration-300">
-                    email@anda.com
+                    ahmadzhofir1808@gmail.com
                   </a>
                 </div>
               </div>
@@ -221,8 +221,8 @@ export default function Contact() {
                   <h4 className="text-lg font-semibold text-heading mb-1">
                     WhatsApp
                   </h4>
-                  <a href="https://wa.me/62812345678900" target="_blank" className="text-body hover:text-primary transition duration-300">
-                    +62 812-3456-7890
+                  <a href="https://wa.me/6285656305716" target="_blank" className="text-body hover:text-primary transition duration-300">
+                    +62 856-5630-5716
                   </a>
                 </div>
               </div>
