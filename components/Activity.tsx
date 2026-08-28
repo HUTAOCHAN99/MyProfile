@@ -112,7 +112,7 @@ const activities = [
     status: "active",
     category: "Travel Website",
     demo_url: "",
-    github_url: "",
+    github_url: "https://github.com/HUTAOCHAN99/Tour-Mega",
     order_index: 6
   },
 ];
