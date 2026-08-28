@@ -58,19 +58,14 @@ const useMobileMenu = () => {
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
-          const scrollToTarget = () => {
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          };
-
-          if (href === "#contact") {
-            window.scrollBy({ top: -80, behavior: "smooth" });
-            setTimeout(scrollToTarget, 250);
-          } else {
-            scrollToTarget();
-          }
+          // Langsung scroll smooth ke posisi target — headerHeight sudah
+          // dikompensasi lewat offsetPosition di atas, jadi tidak perlu lagi
+          // "scroll ke atas dulu" sebelum scroll ke target (itu penyebab
+          // efek "naik dulu baru turun" saat klik link Kontak).
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
       } else {
         window.location.href = href;

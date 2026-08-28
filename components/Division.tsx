@@ -281,8 +281,17 @@ export default function Division() {
       document.body.style.width = previous.bodyWidth
       document.body.style.overflow = previous.bodyOverflow
       document.body.style.paddingRight = previous.bodyPaddingRight
+
       // Kembalikan posisi scroll persis seperti sebelum panel dibuka.
+      // Non-aktifkan `scroll-smooth` (class di <html>, lihat app/layout.tsx)
+      // SEMENTARA khusus untuk scrollTo ini, supaya restore-nya instan/snap.
+      // Tanpa ini, browser menganimasikan scroll dari 0 -> scrollY sehingga
+      // terlihat seperti "efek scroll dari atas" padahal cuma balik ke posisi semula.
+      const htmlEl = document.documentElement
+      const prevScrollBehavior = htmlEl.style.scrollBehavior
+      htmlEl.style.scrollBehavior = 'auto'
       window.scrollTo(0, scrollY)
+      htmlEl.style.scrollBehavior = prevScrollBehavior
     }
   }, [selected, handleClose])
 

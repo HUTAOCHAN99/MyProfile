@@ -1,7 +1,7 @@
 // components/Activity.tsx
 'use client';
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -14,7 +14,6 @@ import {
 import { experiences } from "./Experience";
 import { ROW_1, ROW_2 } from "./Division";
 
-// Data statis untuk proyek - TODO: ganti dengan proyek Anda sendiri
 const activities = [
   {
     id: "1",
@@ -142,6 +141,71 @@ const stats = [
     icon: <FaCode className="text-primary text-2xl" />,
   },
 ];
+
+function CountUpNumber({ value }: { value: string }) {
+  const target = Number(value);
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || !Number.isFinite(target)) return;
+
+    let animationFrame = 0;
+    let hasStarted = false;
+
+    const animate = () => {
+      const startTime = performance.now();
+      const duration = 1200;
+
+      const update = (currentTime: number) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.round(target * easedProgress));
+
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(update);
+        }
+      };
+
+      animationFrame = requestAnimationFrame(update);
+    };
+
+    const startAnimation = () => {
+      if (hasStarted) return;
+      hasStarted = true;
+      animate();
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      animationFrame = requestAnimationFrame(() => setCount(target));
+      return () => cancelAnimationFrame(animationFrame);
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      startAnimation();
+      return () => cancelAnimationFrame(animationFrame);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startAnimation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [target]);
+
+  return <div ref={ref}>{count}</div>;
+}
 
 export default function Activity() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -304,7 +368,7 @@ export default function Activity() {
                     </div>
 
                     <div className="text-3xl font-bold text-heading mb-1">
-                      {stat.number}
+                      <CountUpNumber value={stat.number} />
                     </div>
 
                     <div className="text-body text-sm tracking-wide">
@@ -333,9 +397,8 @@ export default function Activity() {
                 >
                   Hubungi Saya
                 </Link>
-                {/* TODO: ganti dengan nomor WhatsApp Anda, format: 628xxxxxxxxxx */}
                 <a
-                  href="https://wa.me/62812345678900"
+                  href="https://wa.me/6285656305716"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-surface hover:bg-surface-2 text-heading font-medium py-3 px-6 rounded-lg border border-border-strong hover:border-subtle transition duration-300 text-center"
