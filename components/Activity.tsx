@@ -14,82 +14,82 @@ const activities = [
   {
     id: "1",
     title: "MyProfile - Personal Portfolio",
-    description: "Website portofolio pribadi yang berisi karya dan pengalaman saya.",
+    description: "Website portofolio pribadi untuk menampilkan profil, pengalaman, keahlian, dan proyek yang pernah saya kerjakan.",
     image_url: "/images/project-1.jpg",
     status: "active",
-    category: "Web Development",
+    category: "Portfolio Website",
     order_index: 1
   },
   {
     id: "2",
     title: "Sistem Informasi Madrasah Diniyah Nurul Huda Kebondalem",
-    description: "Sistem informasi untuk madrasah diniyah yang berfungsi untuk mengelola data siswa dan kegiatan pendidikan.",
+    description: "Sistem informasi madrasah diniyah untuk membantu pengelolaan data siswa, kegiatan belajar, dan administrasi pendidikan.",
     image_url: "/images/project-2.jpg",
     status: "active",
-    category: "Mobile Development",
+    category: "Education System",
     order_index: 2
   },
   {
     id: "3",
     title: "AgemasenBot",
-    description: "Chatbot untuk membantu pengguna dalam menemukan gambar anime,convert image,gif,video menjadi stiker whatsapp,download media dari berbagai platform,dan lainnya.",
+    description: "Chatbot multifungsi untuk mencari gambar anime, mengubah gambar, GIF, dan video menjadi stiker WhatsApp, serta mengunduh media dari berbagai platform.",
     image_url: "/images/project-3.jpg",
     status: "active",
-    category: "UI/UX Design",
+    category: "Chatbot & Automation",
     order_index: 3
   },
   {
     id: "4",
     title: "Sampah Desa",
-    description: "Aplikasi untuk mengelola dan memantau limbah di desa.",
+    description: "Aplikasi pengelolaan sampah desa untuk mendata, memantau, dan membantu pengorganisasian aktivitas pengelolaan limbah.",
     image_url: "/images/project-4.jpg",
     status: "active",
-    category: "Freelance",
+    category: "Environmental Management",
     order_index: 5
   },
   {
     id: "5",
     title: "Plant Monitoring",
-    description: "Aplikasi untuk memantau kondisi tanaman secara real-time.",
+    description: "Aplikasi monitoring tanaman untuk memantau kondisi tanaman secara real-time dan membantu perawatan berdasarkan data yang tersedia.",
     image_url: "/images/project-5.jpg",
     status: "active",
-    category: "Personal Project",
+    category: "IoT & Monitoring",
     order_index: 6
   },
   {
     id: "6",
     title: "Al-Khawarizmi Website",
-    description: "Website untuk memperkenalkan kelompok studi mahasiswa Islam Jurusan Teknik Informatika.",
+    description: "Website profil KSM Al-Khawarizmi untuk memperkenalkan kelompok studi mahasiswa Islam Jurusan Teknik Informatika, kegiatan, dan informasinya.",
     image_url: "/images/project-7.jpg",
     status: "active",
-    category: "Personal Project",
+    category: "Organization Website",
     order_index: 6
   },
   {
     id: "7",
     title: "KanaApp",
-    description: "Aplikasi untuk membantu pengguna belajar huruf kana (hiragana dan katakana) dalam bahasa Jepang.",
+    description: "Aplikasi pembelajaran bahasa Jepang untuk membantu pengguna mempelajari dan berlatih huruf kana, yaitu hiragana dan katakana.",
     image_url: "/images/project-8.jpg",
     status: "active",
-    category: "Personal Project",
+    category: "Learning Application",
     order_index: 6
   },
   {
     id: "8",
     title: "Purewill",
-    description: "Aplikasi Habit Tracker.",
+    description: "Aplikasi habit tracker untuk membantu pengguna membangun, mencatat, dan memantau kebiasaan positif secara konsisten.",
     image_url: "/images/project-11.jpg",
     status: "active",
-    category: "Personal Project",
+    category: "Productivity App",
     order_index: 6
   },
   {
     id: "9",
     title: "Website Tour Mega",
-    description: "Website untuk memperkenalkan jasa tour dan travel Haji dan Umrah.",
+    description: "Website informasi dan promosi layanan tour dan travel untuk membantu memperkenalkan paket perjalanan Haji dan Umrah.",
     image_url: "/images/project-9.jpg",
     status: "active",
-    category: "Personal Project",
+    category: "Travel Website",
     order_index: 6
   },
 ];
