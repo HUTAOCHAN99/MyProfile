@@ -14,7 +14,7 @@ const activities = [
   {
     id: "1",
     title: "MyProfile - Personal Portfolio",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Website portofolio pribadi yang berisi karya dan pengalaman saya.",
     image_url: "/images/project-1.jpg",
     status: "active",
     category: "Web Development",
@@ -23,7 +23,7 @@ const activities = [
   {
     id: "2",
     title: "Sistem Informasi Madrasah Diniyah Nurul Huda Kebondalem",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Sistem informasi untuk madrasah diniyah yang berfungsi untuk mengelola data siswa dan kegiatan pendidikan.",
     image_url: "/images/project-2.jpg",
     status: "active",
     category: "Mobile Development",
@@ -32,7 +32,7 @@ const activities = [
   {
     id: "3",
     title: "AgemasenBot",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Chatbot untuk membantu pengguna dalam menemukan gambar anime,convert image,gif,video menjadi stiker whatsapp,download media dari berbagai platform,dan lainnya.",
     image_url: "/images/project-3.jpg",
     status: "active",
     category: "UI/UX Design",
@@ -41,7 +41,7 @@ const activities = [
   {
     id: "4",
     title: "Sampah Desa",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Aplikasi untuk mengelola dan memantau limbah di desa.",
     image_url: "/images/project-4.jpg",
     status: "active",
     category: "Freelance",
@@ -50,7 +50,7 @@ const activities = [
   {
     id: "5",
     title: "Plant Monitoring",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Aplikasi untuk memantau kondisi tanaman secara real-time.",
     image_url: "/images/project-5.jpg",
     status: "active",
     category: "Personal Project",
@@ -59,7 +59,7 @@ const activities = [
   {
     id: "6",
     title: "Al-Khawarizmi Website",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Website untuk memperkenalkan kelompok studi mahasiswa Islam Jurusan Teknik Informatika.",
     image_url: "/images/project-7.jpg",
     status: "active",
     category: "Personal Project",
@@ -68,7 +68,7 @@ const activities = [
   {
     id: "7",
     title: "KanaApp",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Aplikasi untuk membantu pengguna belajar huruf kana (hiragana dan katakana) dalam bahasa Jepang.",
     image_url: "/images/project-8.jpg",
     status: "active",
     category: "Personal Project",
@@ -77,7 +77,7 @@ const activities = [
   {
     id: "8",
     title: "Purewill",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Aplikasi Habit Tracker.",
     image_url: "/images/project-11.jpg",
     status: "active",
     category: "Personal Project",
@@ -86,7 +86,7 @@ const activities = [
   {
     id: "9",
     title: "Website Tour Mega",
-    description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
+    description: "Website untuk memperkenalkan jasa tour dan travel Haji dan Umrah.",
     image_url: "/images/project-9.jpg",
     status: "active",
     category: "Personal Project",

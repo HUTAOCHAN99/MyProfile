@@ -2,6 +2,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { ThemeProvider, themeInitScript } from '../components/ThemeProvider'
+import { CustomCursor } from '../components/CustomCursor'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.className} bg-page text-body`} suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <CustomCursor />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

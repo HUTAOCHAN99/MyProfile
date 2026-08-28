@@ -37,8 +37,55 @@
   --color-primary-dark: #155e75;  /* cyan-800 */
 }
 
-html {
+html,
+body {
   background-color: var(--color-page);
+  cursor: auto;
+}
+
+.custom-cursor {
+  position: fixed;
+  z-index: 2147483647;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  pointer-events: none;
+  transform: translate(8px, -24px);
+  user-select: none;
+}
+
+button,
+a,
+summary,
+[role='button'],
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+select,
+label {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
+button:active,
+a:active,
+summary:active,
+[role='button']:active,
+input:active,
+select:active,
+label:active {
+  cursor: pointer;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
 }
 
 body,
