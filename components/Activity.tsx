@@ -78,7 +78,7 @@ const activities = [
     id: "8",
     title: "Purewill",
     description: "Deskripsikan proyek ini: apa masalah yang diselesaikan, teknologi yang digunakan, dan hasilnya.",
-    image_url: "/images/project-10.jpg",
+    image_url: "/images/project-11.jpg",
     status: "active",
     category: "Personal Project",
     order_index: 6
