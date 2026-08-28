@@ -86,6 +86,10 @@ label:active {
   .custom-cursor {
     display: none;
   }
+
+  .custom-cursor.is-touch-visible {
+    display: block;
+  }
 }
 
 body,
@@ -243,4 +247,18 @@ section {
 /* Untuk mencegah scroll pada body saat sidebar terbuka di mobile */
 body.sidebar-open {
   overflow: hidden;
+}
+
+/* Fade-in halus untuk setiap section: dipakai lewat komponen <Reveal> */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

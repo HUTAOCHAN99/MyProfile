@@ -8,6 +8,7 @@ import Division from '../components/Division'
 import Footer from '../components/Footer'
 import ActivityComponent from '../components/Activity'
 import Experience from '../components/Experience'
+import Reveal from '../components/Reveal'
 
 export default function Home() {
   return (
@@ -15,14 +16,28 @@ export default function Home() {
       <BackToTop />
       <Header />
       <main>
-        <Hero />
-        <About />
-        <Division />
-        <Experience />
-        <ActivityComponent />
-        <Contact />
+        <Reveal>
+          <Hero />
+        </Reveal>
+        <Reveal>
+          <About />
+        </Reveal>
+        <Reveal>
+          <Division />
+        </Reveal>
+        <Reveal>
+          <Experience />
+        </Reveal>
+        <Reveal>
+          <ActivityComponent />
+        </Reveal>
+        <Reveal>
+          <Contact />
+        </Reveal>
       </main>
-      <Footer />
+      <Reveal>
+        <Footer />
+      </Reveal>
     </>
   )
 }

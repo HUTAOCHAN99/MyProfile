@@ -98,30 +98,28 @@ export default function Experience() {
                   key={item.id}
                   className="timeline-item transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg active:translate-y-0 active:scale-[0.99]"
                 >
-                  <div className="flex items-start justify-between gap-4 flex-wrap sm:flex-nowrap">
-                    <div className="flex items-start gap-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-heading">
-                          {item.role}
-                        </h3>
-                        <p className="text-body text-sm mt-0.5">
-                          {item.place}
-                        </p>
-                        <div className="mt-3 flex items-center flex-wrap gap-2">
-                          <span className="timeline-tag">
-                            {item.category}
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-heading">
+                        {item.role}
+                      </h3>
+                      <p className="text-body text-sm mt-0.5">
+                        {item.place}
+                      </p>
+                      <div className="mt-3 flex items-center flex-wrap gap-2">
+                        <span className="timeline-tag">
+                          {item.category}
+                        </span>
+                        {item.current && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-primary">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                            Aktif
                           </span>
-                          {item.current && (
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-primary">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                              Aktif
-                            </span>
-                          )}
-                        </div>
+                        )}
                       </div>
                     </div>
 
-                    <span className="timeline-date shrink-0 text-sm font-medium text-muted whitespace-nowrap ml-15 sm:ml-0">
+                    <span className="timeline-date shrink-0 text-sm font-medium text-muted whitespace-nowrap">
                       {item.period}
                     </span>
                   </div>

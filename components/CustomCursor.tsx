@@ -1,17 +1,37 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 })
   const [isPressed, setIsPressed] = useState(false)
+  const [isTouchVisible, setIsTouchVisible] = useState(false)
+  const touchHideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const handlePointerMove = (event: PointerEvent) => {
-      setPosition({ x: event.clientX, y: event.clientY })
+      if (event.pointerType !== 'touch') {
+        setPosition({ x: event.clientX, y: event.clientY })
+      }
     }
-    const handlePointerDown = () => setIsPressed(true)
-    const handlePointerUp = () => setIsPressed(false)
+    const handlePointerDown = (event: PointerEvent) => {
+      setPosition({ x: event.clientX, y: event.clientY })
+      setIsPressed(true)
+
+      if (event.pointerType === 'touch') {
+        setIsTouchVisible(true)
+        if (touchHideTimeout.current) clearTimeout(touchHideTimeout.current)
+      }
+    }
+    const handlePointerUp = (event: PointerEvent) => {
+      setIsPressed(false)
+
+      if (event.pointerType === 'touch') {
+        touchHideTimeout.current = setTimeout(() => {
+          setIsTouchVisible(false)
+        }, 450)
+      }
+    }
 
     window.addEventListener('pointermove', handlePointerMove)
     window.addEventListener('pointerdown', handlePointerDown)
@@ -23,15 +43,16 @@ export function CustomCursor() {
       window.removeEventListener('pointerdown', handlePointerDown)
       window.removeEventListener('pointerup', handlePointerUp)
       window.removeEventListener('pointercancel', handlePointerUp)
+      if (touchHideTimeout.current) clearTimeout(touchHideTimeout.current)
     }
   }, [])
 
   return (
     <img
-      src={isPressed ? '/cursor/click.webp' : '/cursor/hover.webp'}
+      src={isPressed || isTouchVisible ? '/cursor/click.webp' : '/cursor/hover.webp'}
       alt=""
       aria-hidden="true"
-      className="custom-cursor"
+      className={`custom-cursor${isTouchVisible ? ' is-touch-visible' : ''}`}
       style={{ left: position.x, top: position.y }}
     />
   )

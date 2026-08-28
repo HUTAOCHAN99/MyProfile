@@ -57,11 +57,20 @@ const useMobileMenu = () => {
           const headerHeight = 80; // Sesuaikan dengan tinggi header
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+
+          const scrollToTarget = () => {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          };
+
+          if (href === "#contact") {
+            window.scrollBy({ top: -80, behavior: "smooth" });
+            setTimeout(scrollToTarget, 250);
+          } else {
+            scrollToTarget();
+          }
         }
       } else {
         window.location.href = href;
@@ -118,8 +127,7 @@ export default function Header() {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Perjalanan", href: "#journey" },
-    { name: "Tech Stack", href: "#skills" },
-    { name: "Skills", href: "#stack" },
+    { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#project" },
     { name: "Kontak", href: "#contact" },
   ];
