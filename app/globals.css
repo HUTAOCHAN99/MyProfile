@@ -262,3 +262,12 @@ body.sidebar-open {
   opacity: 1;
   transform: translateY(0);
 }
+
+.tech-detail-overlay {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tech-detail-overlay::-webkit-scrollbar {
+  display: none;
+}

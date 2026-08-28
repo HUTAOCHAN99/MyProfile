@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { IconType } from 'react-icons'
 import {
@@ -237,22 +238,51 @@ export default function Division() {
     triggerRef.current?.focus()
   }, [])
 
-  // ESC untuk menutup + lock scroll body selama panel terbuka
+  // ESC untuk menutup + lock scroll (html & body) selama panel terbuka.
+  // Pakai teknik "freeze" posisi scroll (bukan cuma overflow:hidden) supaya
+  // beberapa browser/perangkat gak tetap bisa scroll halaman di belakang
+  // backdrop, dan kompensasi lebar scrollbar biar layout gak geser.
   useEffect(() => {
     if (!selected) return
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') handleClose()
     }
-
     window.addEventListener('keydown', onKeyDown)
-    const previousOverflow = document.body.style.overflow
+
+    const scrollY = window.scrollY
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+
+    const previous = {
+      htmlOverflow: document.documentElement.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      bodyWidth: document.body.style.width,
+      bodyOverflow: document.body.style.overflow,
+      bodyPaddingRight: document.body.style.paddingRight,
+    }
+
+    document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+    }
+
     closeBtnRef.current?.focus()
 
     return () => {
       window.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = previousOverflow
+      document.documentElement.style.overflow = previous.htmlOverflow
+      document.body.style.position = previous.bodyPosition
+      document.body.style.top = previous.bodyTop
+      document.body.style.width = previous.bodyWidth
+      document.body.style.overflow = previous.bodyOverflow
+      document.body.style.paddingRight = previous.bodyPaddingRight
+      // Kembalikan posisi scroll persis seperti sebelum panel dibuka.
+      window.scrollTo(0, scrollY)
     }
   }, [selected, handleClose])
 
@@ -481,6 +511,7 @@ function TechDetailOverlay({
 }) {
   const Icon = tech.Icon
   const [target, setTarget] = useState<{ top: number; left: number; size: number } | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   useLayoutEffect(() => {
     const compute = () => {
@@ -495,7 +526,12 @@ function TechDetailOverlay({
     return () => window.removeEventListener('resize', compute)
   }, [])
 
-  if (!target) return null
+  // Portal target hanya tersedia di client — hindari mismatch SSR.
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!target || !mounted) return null
 
   const originCenterX = origin.left + origin.width / 2
   const originCenterY = origin.top + origin.height / 2
@@ -505,7 +541,13 @@ function TechDetailOverlay({
 
   const flipTransition = { type: 'spring' as const, stiffness: 180, damping: 24, mass: 0.9 }
 
-  return (
+  // Di-portal langsung ke <body> supaya `position: fixed` SELALU relatif ke
+  // viewport asli (selalu 100vh penuh, di mana pun section ini di-scroll),
+  // dan tidak "terjebak" jadi relatif ke ancestor manapun yang punya
+  // transform/will-change aktif (mis. wrapper <Reveal> yang membungkus
+  // section ini — transform ancestor membuat containing block baru untuk
+  // descendant fixed, sehingga overlay jadi seolah cuma setinggi section).
+  return createPortal(
     <>
       {/* backdrop: dim + blur sisa halaman */}
       <motion.div
@@ -544,7 +586,7 @@ function TechDetailOverlay({
 
       {/* info panel */}
       <div
-        className="fixed inset-0 z-50 flex flex-col items-center overflow-y-auto px-4 pb-10"
+        className="tech-detail-overlay fixed inset-0 z-50 flex flex-col items-center overflow-hidden px-4 pb-10"
         onClick={onClose}
       >
         <div style={{ height: target.top + target.size / 2 + 32 }} className="w-full shrink-0" aria-hidden="true" />
@@ -600,7 +642,8 @@ function TechDetailOverlay({
           </a>
         </motion.div>
       </div>
-    </>
+    </>,
+    document.body
   )
 }
 
