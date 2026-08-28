@@ -7,6 +7,8 @@ import Image from "next/image";
 import {
   FaCalendar,
   FaCode,
+  FaExternalLinkAlt,
+  FaGithub,
   FaLaptopCode,
 } from "react-icons/fa";
 import { experiences } from "./Experience";
@@ -21,6 +23,8 @@ const activities = [
     image_url: "/images/project-1.jpg",
     status: "active",
     category: "Portfolio Website",
+    demo_url: "https://zhofir.vercel.app/",
+    github_url: "https://github.com/HUTAOCHAN99/MyProfile",
     order_index: 1
   },
   {
@@ -30,6 +34,8 @@ const activities = [
     image_url: "/images/project-2.jpg",
     status: "active",
     category: "Education System",
+    demo_url: "https://madin-nurul-huda-kebondalem.vercel.app/",
+    github_url: "https://github.com/HUTAOCHAN99/Sistem-Informasi-Madin",
     order_index: 2
   },
   {
@@ -39,7 +45,9 @@ const activities = [
     image_url: "/images/project-3.jpg",
     status: "active",
     category: "Chatbot & Automation",
-    order_index: 3
+    demo_url: "https://wa.me/6289650789020?text=%21menu",
+    github_url: "https://github.com/HUTAOCHAN99/AgemasenBot.git",
+    order_index: 3 
   },
   {
     id: "4",
@@ -48,6 +56,8 @@ const activities = [
     image_url: "/images/project-4.jpg",
     status: "active",
     category: "Environmental Management",
+    demo_url: "https://sistem-informasi-sampah.vercel.app/login",
+    github_url: "https://github.com/HUTAOCHAN99/Sistem-Informasi-Sampah",
     order_index: 5
   },
   {
@@ -57,6 +67,8 @@ const activities = [
     image_url: "/images/project-5.jpg",
     status: "active",
     category: "IoT & Monitoring",
+    demo_url: "https://plant-monitoring-v2.vercel.app/",
+    github_url: "https://github.com/HUTAOCHAN99/plant-monitoring-v2",
     order_index: 6
   },
   {
@@ -66,6 +78,8 @@ const activities = [
     image_url: "/images/project-7.jpg",
     status: "active",
     category: "Organization Website",
+    demo_url: "https://ak-web-pied.vercel.app/",
+    github_url: "https://github.com/HUTAOCHAN99/AK-WEB",
     order_index: 6
   },
   {
@@ -75,6 +89,8 @@ const activities = [
     image_url: "/images/project-8.jpg",
     status: "active",
     category: "Learning Application",
+    demo_url: "https://kana-app-delta.vercel.app/",
+    github_url: "https://github.com/HUTAOCHAN99/KanaApp",
     order_index: 6
   },
   {
@@ -84,6 +100,8 @@ const activities = [
     image_url: "/images/project-11.jpg",
     status: "active",
     category: "Productivity App",
+    demo_url: "",
+    github_url: "https://github.com/HUTAOCHAN99/PUREWILL_FIX",
     order_index: 6
   },
   {
@@ -93,6 +111,8 @@ const activities = [
     image_url: "/images/project-9.jpg",
     status: "active",
     category: "Travel Website",
+    demo_url: "",
+    github_url: "",
     order_index: 6
   },
 ];
@@ -200,31 +220,42 @@ export default function Activity() {
                       </p>
                     </div>
 
-                    <div className="mt-auto pt-4 border-t border-border">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-muted flex items-center">
-                          <FaCalendar className="w-3 h-3 mr-2" />
-                          {activity.category}
-                        </span>
-                        <Link
-                          href={`/activity/${activity.id}`}
-                          className="text-primary hover:text-primary-light font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300"
-                        >
-                          Learn More
-                          <svg
-                            className="w-4 h-4 ml-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                    <div className="mt-auto border-t border-border pt-4">
+                      <div className="mb-3 flex items-center text-sm text-muted">
+                        <FaCalendar className="mr-2 h-3 w-3" />
+                        {activity.category}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {activity.demo_url ? (
+                          <a
+                            href={activity.demo_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-dark"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M14 5l7 7m0 0l-7 7m7-7H3"
-                            />
-                          </svg>
-                        </Link>
+                            <FaExternalLinkAlt className="mr-2 text-xs" />
+                            Demo
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm text-muted">
+                            Demo belum tersedia
+                          </span>
+                        )}
+                        {activity.github_url ? (
+                          <a
+                            href={activity.github_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center rounded-lg border border-border-strong px-3 py-2 text-sm font-medium text-heading transition hover:border-primary hover:bg-surface-2"
+                          >
+                            <FaGithub className="mr-2 text-base" />
+                            GitHub
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm text-muted">
+                            GitHub belum tersedia
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

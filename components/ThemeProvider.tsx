@@ -3,7 +3,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from "react";
@@ -23,12 +22,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   // Dark is the default/base theme (matches Hero). We read the real value
   // on mount because the blocking script in <head> may have already applied
   // the "light" class before React hydrates.
-  const [theme, setTheme] = useState<Theme>("dark");
-
-  useEffect(() => {
-    const isLight = document.documentElement.classList.contains("light");
-    setTheme(isLight ? "light" : "dark");
-  }, []);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof document === "undefined") return "dark";
+    return document.documentElement.classList.contains("light") ? "light" : "dark";
+  });
 
   const toggleTheme = () => {
     setTheme((prev) => {
