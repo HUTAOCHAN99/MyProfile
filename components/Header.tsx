@@ -2,6 +2,9 @@
 import { useState, useEffect, useRef } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
 
 // Custom hook untuk mengelola mobile menu
 const useMobileMenu = () => {
@@ -92,6 +95,9 @@ export default function Header() {
     menuRef
   } = useMobileMenu();
 
+  const { language } = useLanguage();
+  const t = translations[language].header;
+
   // Handle scroll untuk header
   useEffect(() => {
     const handleScroll = () => {
@@ -119,12 +125,12 @@ export default function Header() {
 
   // Navigation items - sesuaikan label & href dengan section yang Anda pakai
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Perjalanan", href: "#journey" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#project" },
-    { name: "Kontak", href: "#contact" },
+    { name: t.nav.home, href: "#home" },
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.journey, href: "#journey" },
+    { name: t.nav.skills, href: "#skills" },
+    { name: t.nav.projects, href: "#project" },
+    { name: t.nav.contact, href: "#contact" },
   ];
 
   // Handle escape key untuk menutup menu
@@ -187,18 +193,20 @@ export default function Header() {
           </nav>
 
           {/* Theme Toggle (desktop) */}
-          <div className="hidden lg:block shrink-0 mr-2">
+          <div className="hidden lg:flex shrink-0 mr-2 items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="shrink-0 lg:hidden flex items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               id="humberger"
               onClick={toggleMenu}
               className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary z-[100] transition duration-300 hover:bg-surface"
-              aria-label="Toggle menu"
+              aria-label={t.toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="nav-menu"
             >
@@ -246,7 +254,7 @@ export default function Header() {
               id="close-menu"
               onClick={closeMenu}
               className="text-heading text-2xl p-2 hover:bg-surface rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
-              aria-label="Close menu"
+              aria-label={t.closeMenu}
             >
               <FiX className="w-6 h-6" />
             </button>
@@ -272,7 +280,7 @@ export default function Header() {
             {/* Social Media Links in Mobile Menu - ganti dengan akun Anda */}
             <li className="pt-8 mt-8 border-t border-border-subtle">
               <div className="px-4">
-                <p className="text-muted text-sm mb-4">Follow Me</p>
+                <p className="text-muted text-sm mb-4">{t.followMe}</p>
                 <div className="flex space-x-4">
                   <a
                     href="https://github.com/username"
@@ -335,7 +343,7 @@ export default function Header() {
               className="block w-full bg-primary hover:bg-primary-dark text-white text-center font-medium py-3 px-6 rounded-lg shadow hover:shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-page"
               aria-label="Get in touch with me"
             >
-              Hubungi Saya
+              {t.contactCta}
             </a>
           </div>
         </div>

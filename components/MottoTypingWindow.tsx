@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { VscVscode } from "react-icons/vsc";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
 
 interface MottoTypingWindowProps {
   /** Nama file yang tampil di title bar & tab, mis. "motto.ts" */
@@ -33,6 +35,8 @@ export default function MottoTypingWindow({
   const [phase, setPhase] = useState<"typing" | "pausing" | "deleting" | "waiting">(
     "typing"
   );
+  const { language } = useLanguage();
+  const t = translations[language].about;
 
   useEffect(() => {
     const reduceMotion =
@@ -110,7 +114,7 @@ export default function MottoTypingWindow({
       <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed min-h-[200px] sm:min-h-[240px]">
         <div className="flex">
           <span className="text-gray-600 w-6 shrink-0 select-none">1</span>
-          <span className="text-emerald-500/80">{"// Motto saya"}</span>
+          <span className="text-emerald-500/80">{t.mottoComment}</span>
         </div>
         <div className="flex">
           <span className="text-gray-600 w-6 shrink-0 select-none">2</span>

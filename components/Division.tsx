@@ -28,6 +28,8 @@ import {
   SiTailwindcss,
 } from 'react-icons/si'
 import { LuX, LuExternalLink } from 'react-icons/lu'
+import { useLanguage } from './LanguageProvider'
+import { translations } from '../lib/i18n'
 
 // ============================================================================
 // DATA — daftar teknologi. Tambah / ubah / hapus item di sini.
@@ -36,7 +38,7 @@ type Tech = {
   id: string
   name: string
   category: string
-  description: string
+  description: { id: string; en: string }
   docUrl: string
   Icon: IconType
   color: string
@@ -47,8 +49,10 @@ export const ROW_1: Tech[] = [
     id: 'nextjs',
     name: 'Next.js',
     category: 'React Framework',
-    description:
-      'Full-stack React framework untuk membangun aplikasi web modern dengan server rendering dan routing bawaan.',
+    description: {
+      id: 'Full-stack React framework untuk membangun aplikasi web modern dengan server rendering dan routing bawaan.',
+      en: 'A full-stack React framework for building modern web apps, with server rendering and routing built in.',
+    },
     docUrl: 'https://nextjs.org/docs',
     Icon: SiNextdotjs,
     color: '#FFFFFF',
@@ -57,8 +61,10 @@ export const ROW_1: Tech[] = [
     id: 'react',
     name: 'React',
     category: 'UI Library',
-    description:
-      'Library JavaScript untuk membangun antarmuka pengguna berbasis komponen yang cepat dan reaktif.',
+    description: {
+      id: 'Library JavaScript untuk membangun antarmuka pengguna berbasis komponen yang cepat dan reaktif.',
+      en: 'A JavaScript library for building fast, reactive, component-based user interfaces.',
+    },
     docUrl: 'https://react.dev',
     Icon: SiReact,
     color: '#61DAFB',
@@ -67,8 +73,10 @@ export const ROW_1: Tech[] = [
     id: 'python',
     name: 'Python',
     category: 'Programming Language',
-    description:
-      'Bahasa pemrograman serbaguna dengan sintaks bersih, banyak dipakai untuk backend, data, dan automasi.',
+    description: {
+      id: 'Bahasa pemrograman serbaguna dengan sintaks bersih, banyak dipakai untuk backend, data, dan automasi.',
+      en: 'A versatile programming language with clean syntax, widely used for backend, data, and automation work.',
+    },
     docUrl: 'https://docs.python.org/3/',
     Icon: SiPython,
     color: '#3776AB',
@@ -77,8 +85,10 @@ export const ROW_1: Tech[] = [
     id: 'unity',
     name: 'Unity',
     category: 'Game Engine',
-    description:
-      'Game engine lintas platform untuk membangun game 2D, 3D, serta pengalaman interaktif real-time.',
+    description: {
+      id: 'Game engine lintas platform untuk membangun game 2D, 3D, serta pengalaman interaktif real-time.',
+      en: 'A cross-platform game engine for building 2D, 3D, and real-time interactive experiences.',
+    },
     docUrl: 'https://docs.unity3d.com/',
     Icon: SiUnity,
     color: '#FFFFFF',
@@ -87,8 +97,10 @@ export const ROW_1: Tech[] = [
     id: 'docker',
     name: 'Docker',
     category: 'Containerization',
-    description:
-      'Platform containerization untuk mengemas, mendistribusikan, dan menjalankan aplikasi secara konsisten.',
+    description: {
+      id: 'Platform containerization untuk mengemas, mendistribusikan, dan menjalankan aplikasi secara konsisten.',
+      en: 'A containerization platform for packaging, shipping, and running applications consistently.',
+    },
     docUrl: 'https://docs.docker.com/',
     Icon: SiDocker,
     color: '#2496ED',
@@ -97,8 +109,10 @@ export const ROW_1: Tech[] = [
     id: 'nodejs',
     name: 'Node.js',
     category: 'JavaScript Runtime',
-    description:
-      'Runtime JavaScript berbasis mesin V8 untuk membangun layanan backend yang cepat dan scalable.',
+    description: {
+      id: 'Runtime JavaScript berbasis mesin V8 untuk membangun layanan backend yang cepat dan scalable.',
+      en: 'A V8-powered JavaScript runtime for building fast, scalable backend services.',
+    },
     docUrl: 'https://nodejs.org/en/docs',
     Icon: SiNodedotjs,
     color: '#339933',
@@ -107,8 +121,10 @@ export const ROW_1: Tech[] = [
     id: 'javascript',
     name: 'JavaScript',
     category: 'Programming Language',
-    description:
-      'Bahasa inti web — menjalankan logika interaktif di browser maupun server.',
+    description: {
+      id: 'Bahasa inti web — menjalankan logika interaktif di browser maupun server.',
+      en: "The web's core language — runs interactive logic in the browser and on the server.",
+    },
     docUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
     Icon: SiJavascript,
     color: '#F7DF1E',
@@ -117,8 +133,10 @@ export const ROW_1: Tech[] = [
     id: 'csharp',
     name: 'C#',
     category: 'Programming Language',
-    description:
-      'Bahasa pemrograman modern dari Microsoft, tulang punggung pengembangan game di Unity dan aplikasi .NET.',
+    description: {
+      id: 'Bahasa pemrograman modern dari Microsoft, tulang punggung pengembangan game di Unity dan aplikasi .NET.',
+      en: "Microsoft's modern programming language, the backbone of Unity game development and .NET apps.",
+    },
     docUrl: 'https://learn.microsoft.com/en-us/dotnet/csharp/',
     Icon: SiSharp,
     color: '#9B4F96',
@@ -130,8 +148,10 @@ export const ROW_2: Tech[] = [
     id: 'flutter',
     name: 'Flutter',
     category: 'UI Toolkit',
-    description:
-      'Toolkit UI dari Google untuk membangun aplikasi mobile, web, dan desktop dari satu basis kode.',
+    description: {
+      id: 'Toolkit UI dari Google untuk membangun aplikasi mobile, web, dan desktop dari satu basis kode.',
+      en: "Google's UI toolkit for building mobile, web, and desktop apps from a single codebase.",
+    },
     docUrl: 'https://docs.flutter.dev/',
     Icon: SiFlutter,
     color: '#02569B',
@@ -140,8 +160,10 @@ export const ROW_2: Tech[] = [
     id: 'dart',
     name: 'Dart',
     category: 'Programming Language',
-    description:
-      'Bahasa pemrograman yang dioptimalkan untuk client, dan menjadi fondasi framework Flutter.',
+    description: {
+      id: 'Bahasa pemrograman yang dioptimalkan untuk client, dan menjadi fondasi framework Flutter.',
+      en: 'A client-optimized programming language that powers the Flutter framework.',
+    },
     docUrl: 'https://dart.dev/guides',
     Icon: SiDart,
     color: '#0175C2',
@@ -150,8 +172,10 @@ export const ROW_2: Tech[] = [
     id: 'github',
     name: 'GitHub',
     category: 'Version Control',
-    description:
-      'Platform hosting kode dan kolaborasi berbasis Git untuk mengelola versi dan alur kerja tim.',
+    description: {
+      id: 'Platform hosting kode dan kolaborasi berbasis Git untuk mengelola versi dan alur kerja tim.',
+      en: 'A Git-based code hosting and collaboration platform for managing versions and team workflows.',
+    },
     docUrl: 'https://docs.github.com/',
     Icon: SiGithub,
     color: '#FFFFFF',
@@ -160,8 +184,10 @@ export const ROW_2: Tech[] = [
     id: 'supabase',
     name: 'Supabase',
     category: 'Backend as a Service',
-    description:
-      'Alternatif open-source Firebase — database, auth, dan storage siap pakai berbasis PostgreSQL.',
+    description: {
+      id: 'Alternatif open-source Firebase — database, auth, dan storage siap pakai berbasis PostgreSQL.',
+      en: 'An open-source Firebase alternative — ready-to-use PostgreSQL database, auth, and storage.',
+    },
     docUrl: 'https://supabase.com/docs',
     Icon: SiSupabase,
     color: '#3ECF8E',
@@ -170,8 +196,10 @@ export const ROW_2: Tech[] = [
     id: 'postgresql',
     name: 'PostgreSQL',
     category: 'Relational Database',
-    description:
-      'Sistem basis data relasional open-source yang kuat, andal, dan kaya fitur.',
+    description: {
+      id: 'Sistem basis data relasional open-source yang kuat, andal, dan kaya fitur.',
+      en: 'A powerful, reliable, and feature-rich open-source relational database system.',
+    },
     docUrl: 'https://www.postgresql.org/docs/',
     Icon: SiPostgresql,
     color: '#4169E1',
@@ -180,8 +208,10 @@ export const ROW_2: Tech[] = [
     id: 'typescript',
     name: 'TypeScript',
     category: 'Programming Language',
-    description:
-      'Superset JavaScript dengan static typing, meningkatkan keandalan dan skalabilitas kode.',
+    description: {
+      id: 'Superset JavaScript dengan static typing, meningkatkan keandalan dan skalabilitas kode.',
+      en: 'A JavaScript superset with static typing, improving code reliability and scalability.',
+    },
     docUrl: 'https://www.typescriptlang.org/docs/',
     Icon: SiTypescript,
     color: '#3178C6',
@@ -190,8 +220,10 @@ export const ROW_2: Tech[] = [
     id: 'tailwindcss',
     name: 'Tailwind CSS',
     category: 'CSS Framework',
-    description:
-      'Framework CSS utility-first untuk membangun antarmuka kustom secara cepat langsung di markup.',
+    description: {
+      id: 'Framework CSS utility-first untuk membangun antarmuka kustom secara cepat langsung di markup.',
+      en: 'A utility-first CSS framework for quickly building custom interfaces right in the markup.',
+    },
     docUrl: 'https://tailwindcss.com/docs',
     Icon: SiTailwindcss,
     color: '#38BDF8',
@@ -216,6 +248,8 @@ type SelectPayload = {
 // MAIN COMPONENT
 // ============================================================================
 export default function Division() {
+  const { language } = useLanguage()
+  const t = translations[language].division
   const [selected, setSelected] = useState<Tech | null>(null)
   const [origin, setOrigin] = useState<OriginRect | null>(null)
   const [activeInstance, setActiveInstance] = useState<string | null>(null)
@@ -308,14 +342,14 @@ export default function Division() {
       <div className="relative z-10 mb-16 px-4 text-center md:mb-20">
         <p className="mb-2 flex items-center justify-center gap-2 text-xs font-semibold tracking-[0.35em] text-cyan-400/80">
           <span className="h-px w-6 bg-cyan-400/50" />
-          TECH STACK
+          {t.eyebrow}
           <span className="h-px w-6 bg-cyan-400/50" />
         </p>
         <h2 className="text-3xl font-bold tracking-wide text-heading md:text-4xl">
-           Jelajahi Teknologi di Balik Project Saya
+           {t.title}
         </h2>
         <p className="mx-auto mt-3 max-w-md text-xs tracking-widest text-muted md:text-sm">
-          PILIH SATU UNIT UNTUK MELIHAT DETAIL TEKNIS
+          {t.subtitle}
         </p>
       </div>
 
@@ -450,6 +484,8 @@ function MarqueeItem({
   onSelect: (rect: OriginRect) => void
 }) {
   const Icon = tech.Icon
+  const { language } = useLanguage()
+  const t = translations[language].division
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -465,7 +501,7 @@ function MarqueeItem({
     <motion.button
       type="button"
       tabIndex={isHidden ? -1 : tabIndex}
-      aria-label={`Pilih teknologi ${tech.name}`}
+      aria-label={t.selectAria(tech.name)}
       onClick={handleClick}
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.96 }}
@@ -519,6 +555,8 @@ function TechDetailOverlay({
   closeBtnRef: React.RefObject<HTMLButtonElement | null>
 }) {
   const Icon = tech.Icon
+  const { language } = useLanguage()
+  const t = translations[language].division
   const [target, setTarget] = useState<{ top: number; left: number; size: number } | null>(null)
   const [mounted, setMounted] = useState(false)
 
@@ -603,7 +641,7 @@ function TechDetailOverlay({
         <motion.div
           role="dialog"
           aria-modal="true"
-          aria-label={`Detail teknologi ${tech.name}`}
+          aria-label={t.detailAria(tech.name)}
           onClick={(event) => event.stopPropagation()}
           className="relative w-full max-w-sm rounded-xl border border-border bg-surface/95 p-6 text-center shadow-[0_0_80px_rgba(0,0,0,0.35)] backdrop-blur-xl md:p-7"
           initial={{ opacity: 0, y: 22 }}
@@ -615,7 +653,7 @@ function TechDetailOverlay({
             ref={closeBtnRef}
             type="button"
             onClick={onClose}
-            aria-label="Tutup panel"
+            aria-label={t.closePanel}
             className="absolute right-3 top-3 rounded-full border border-border p-2 text-muted transition-colors duration-200 hover:border-border-strong hover:text-heading focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
             <LuX className="h-4 w-4" />
@@ -632,12 +670,12 @@ function TechDetailOverlay({
           </p>
 
           <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-body">
-            {tech.description}
+            {tech.description[language]}
           </p>
 
           <div className="mt-5 flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.2em] text-emerald-400">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-            STATUS: ACTIVE
+            {t.statusActive}
           </div>
 
           <a
@@ -646,7 +684,7 @@ function TechDetailOverlay({
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-md border border-border-strong px-5 py-2.5 text-xs font-semibold tracking-wider text-heading transition-all duration-300 hover:border-cyan-300 hover:text-cyan-300 hover:shadow-[0_0_20px_rgba(34,211,238,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
-            VIEW DOCUMENTATION
+            {t.viewDocs}
             <LuExternalLink className="h-3.5 w-3.5" />
           </a>
         </motion.div>

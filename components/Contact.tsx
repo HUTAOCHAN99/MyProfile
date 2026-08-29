@@ -13,6 +13,8 @@ import {
   FaTimes
 } from 'react-icons/fa'
 import toast, { Toaster } from 'react-hot-toast'
+import { useLanguage } from './LanguageProvider'
+import { translations } from '../lib/i18n'
 
 interface ContactFormData {
   name: string
@@ -73,6 +75,8 @@ function buildComposeUrl(platform: EmailPlatform, data: ContactFormData): string
 }
 
 export default function Contact() {
+  const { language } = useLanguage()
+  const t = translations[language].contact
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -99,17 +103,17 @@ export default function Contact() {
     const nextErrors: ContactFormErrors = {}
 
     if (!formData.name.trim()) {
-      nextErrors.name = 'Nama wajib diisi.'
+      nextErrors.name = t.errorName
     }
 
     if (!formData.email.trim()) {
-      nextErrors.email = 'Email wajib diisi.'
+      nextErrors.email = t.errorEmail
     } else if (!EMAIL_REGEX.test(formData.email.trim())) {
-      nextErrors.email = 'Format email tidak valid.'
+      nextErrors.email = t.errorEmailInvalid
     }
 
     if (!formData.message.trim()) {
-      nextErrors.message = 'Pesan wajib diisi.'
+      nextErrors.message = t.errorMessage
     }
 
     setErrors(nextErrors)
@@ -120,7 +124,7 @@ export default function Contact() {
   const handleTriggerClick = (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) {
-      toast.error('Periksa kembali data yang Anda isi.')
+      toast.error(t.toastCheckFields)
       return
     }
     setIsMenuOpen(prev => !prev)
@@ -130,7 +134,7 @@ export default function Contact() {
   const handleSelectPlatform = (platform: EmailPlatform) => {
     if (!validate()) {
       setIsMenuOpen(false)
-      toast.error('Periksa kembali data yang Anda isi.')
+      toast.error(t.toastCheckFields)
       return
     }
 
@@ -148,7 +152,7 @@ export default function Contact() {
     triggerRef.current?.focus()
 
     const platformLabel = EMAIL_PLATFORMS.find(p => p.id === platform)?.label ?? platform
-    toast.success(`Membuka compose di ${platformLabel}...`)
+    toast.success(t.toastOpening(platformLabel))
   }
 
   // Tutup modal saat klik di luar dialog
@@ -227,17 +231,17 @@ export default function Contact() {
           <div className="lg:w-1/2">
             <div className="mb-8">
               <p className="text-primary font-semibold mb-2 tracking-wider">
-                -- Contact
+                {t.label}
               </p>
               <h2 className="text-3xl font-semibold text-heading">
-                Get In Touch
+                {t.title}
               </h2>
             </div>
 
             <form onSubmit={handleTriggerClick} className="space-y-6" noValidate>
               <div>
                 <label htmlFor="name" className="block text-body font-medium mb-2">
-                  Name *
+                  {t.nameLabel}
                 </label>
                 <input
                   type="text"
@@ -250,7 +254,7 @@ export default function Contact() {
                   className={`w-full px-4 py-3 bg-surface-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-heading transition duration-300 ${
                     errors.name ? 'border-red-500' : 'border-border-strong'
                   }`}
-                  placeholder="Your Name"
+                  placeholder={t.namePlaceholder}
                 />
                 {errors.name && (
                   <p id="name-error" role="alert" className="mt-2 text-sm text-red-400">
@@ -261,7 +265,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="email" className="block text-body font-medium mb-2">
-                  Email *
+                  {t.emailLabel}
                 </label>
                 <input
                   type="email"
@@ -274,7 +278,7 @@ export default function Contact() {
                   className={`w-full px-4 py-3 bg-surface-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-heading transition duration-300 ${
                     errors.email ? 'border-red-500' : 'border-border-strong'
                   }`}
-                  placeholder="you@example.com"
+                  placeholder={t.emailPlaceholder}
                 />
                 {errors.email && (
                   <p id="email-error" role="alert" className="mt-2 text-sm text-red-400">
@@ -285,7 +289,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="message" className="block text-body font-medium mb-2">
-                  Message *
+                  {t.messageLabel}
                 </label>
                 <textarea
                   id="message"
@@ -298,7 +302,7 @@ export default function Contact() {
                   className={`w-full px-4 py-3 bg-surface-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-heading transition duration-300 ${
                     errors.message ? 'border-red-500' : 'border-border-strong'
                   }`}
-                  placeholder="Your Message"
+                  placeholder={t.messagePlaceholder}
                 ></textarea>
                 {errors.message && (
                   <p id="message-error" role="alert" className="mt-2 text-sm text-red-400">
@@ -317,7 +321,7 @@ export default function Contact() {
                   className="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-lg shadow hover:shadow-md transition duration-300 flex items-center justify-center gap-2"
                 >
                   <FaPaperPlane className="text-sm" />
-                  Send Message
+                  {t.sendMessage}
                 </button>
 
                 {isMenuOpen && (
@@ -337,18 +341,18 @@ export default function Contact() {
                       <div className="mb-5 flex items-start justify-between gap-4">
                         <div>
                           <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                            Send Message
+                            {t.sendMessage}
                           </p>
                           <h3 id="email-platform-title" className="text-xl font-semibold text-heading">
-                            Pilih platform email
+                            {t.choosePlatformTitle}
                           </h3>
                           <p className="mt-2 text-sm text-muted">
-                            Pilih aplikasi untuk membuka draft pesan Anda.
+                            {t.choosePlatformSubtitle}
                           </p>
                         </div>
                         <button
                           type="button"
-                          aria-label="Tutup pilihan platform email"
+                          aria-label={t.closePlatformAria}
                           onClick={() => {
                             setIsMenuOpen(false)
                             triggerRef.current?.focus()
@@ -384,8 +388,8 @@ export default function Contact() {
           {/* Contact Info - TODO: ganti dengan data kontak Anda sendiri */}
           <div className="lg:w-1/2">
             <h2 className="text-3xl font-semibold text-heading mb-8">
-              Punya proyek atau pertanyaan?
-              <span className="block">Mari terhubung!</span>
+              {t.infoTitle}
+              <span className="block">{t.infoTitleLine2}</span>
             </h2>
 
             <div className="space-y-6">
@@ -395,7 +399,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-heading mb-1">
-                    Lokasi
+                    {t.locationLabel}
                   </h4>
                   <p className="text-body">
                     Sleman, Daerah Istimewa Yogyakarta, Indonesia
@@ -409,7 +413,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-heading mb-1">
-                    Email
+                    {t.emailInfoLabel}
                   </h4>
                   <a href="mailto:email@anda.com" className="text-body hover:text-primary transition duration-300">
                     ahmadzhofir1808@gmail.com
@@ -423,7 +427,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-heading mb-1">
-                    WhatsApp
+                    {t.whatsappLabel}
                   </h4>
                   <a href="https://wa.me/6285656305716" target="_blank" className="text-body hover:text-primary transition duration-300">
                     +62 856-5630-5716
@@ -433,7 +437,7 @@ export default function Contact() {
 
               <div className="pt-8">
                 <a href="/assets/CV-NamaAnda.pdf" target="_blank" className="inline-flex items-center text-primary font-medium hover:text-primary-light transition duration-300">
-                  Download CV
+                  {t.downloadCv}
                   <FaArrowRight className="ml-2" />
                 </a>
               </div>

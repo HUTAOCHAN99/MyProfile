@@ -1,6 +1,13 @@
+"use client";
+
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
 
 export default function Footer() {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
+
   return (
     <footer className="py-12 bg-page border-t border-border-subtle">
       <div className="container mx-auto px-4">
@@ -44,10 +51,10 @@ export default function Footer() {
           {/* Copyright - ganti dengan nama Anda */}
           <div className="text-center md:text-right">
             <p className="text-muted text-sm">
-              Copyright © 2026 AZAN DEV. All rights reserved.
+              {t.copyright}
             </p>
             <p className="text-subtle text-xs mt-1">
-              Fullstack Developer
+              {t.role}
             </p>
           </div>
         </div>

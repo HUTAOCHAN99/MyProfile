@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import FuiBackground from "./FuiBackground";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
 
 interface Person {
   id: number;
@@ -20,26 +22,35 @@ interface Person {
     instagram: string;
     linkedin: string;
   };
-  bio: string;
-  introduction: string;
+  bio: { id: string; en: string };
+  introduction: { id: string; en: string };
 }
 
 // Data profil - TODO: ganti semua data di bawah ini dengan data Anda
 const person: Person = {
   id: 1,
   name: "Ahmad Zhofir Amanullah Nayif", // TODO: ganti dengan nama Anda
-  role: "Fullstack Developer)",
+  role: "Fullstack Developer",
   image: "/assets/Zhofir.webp", // TODO: ganti dengan foto Anda
   social: {
     github: "https://github.com/HUTAOCHAN99",
     instagram: "https://www.instagram.com/ahmad_zhofir_a_nayif",
     linkedin: "https://www.linkedin.com/in/username",
   },
-  bio: "Fullstack Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Flutter",
-  introduction: "Sebagai seorang Fullstack Developer, saya memadukan logika backend yang solid dengan antarmuka yang intuitif untuk menciptakan aplikasi web dan mobile yang berpusat pada kepuasan pengguna.",
+  bio: {
+    id: "Fullstack Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Flutter",
+    en: "Fullstack Developer experienced in building modern web apps with Next.js, React, and Flutter",
+  },
+  introduction: {
+    id: "Sebagai seorang Fullstack Developer, saya memadukan logika backend yang solid dengan antarmuka yang intuitif untuk menciptakan aplikasi web dan mobile yang berpusat pada kepuasan pengguna.",
+    en: "As a Fullstack Developer, I combine solid backend logic with intuitive interfaces to build web and mobile apps that put the user's experience first.",
+  },
 };
 
 export default function Hero() {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
+
   return (
     <section
       id="home"
@@ -115,16 +126,16 @@ export default function Hero() {
             {/* Right Content - Description */}
             <div className="w-full lg:w-1/2 space-y-4">
               <p className="text-primary font-semibold text-sm tracking-wider">
-                -- Introduction
+                {t.introLabel}
               </p>
 
               <h2 className="text-lg sm:text-xl md:text-2xl text-heading/90 font-medium">
-                {person.bio}
+                {person.bio[language]}
               </h2>
 
               <div className="space-y-3 text-sm sm:text-base text-body">
                 <p className="text-justify">
-                  {person.introduction}
+                  {person.introduction[language]}
                 </p>
               </div>
 
@@ -132,7 +143,7 @@ export default function Hero() {
                 href="#about"
                 className="inline-flex items-center text-primary text-sm sm:text-base font-medium hover:text-primary-light transition duration-300 group pt-2"
               >
-                Perjalanan saya
+                {t.journeyLink}
                 <FaArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
               </a>
             </div>

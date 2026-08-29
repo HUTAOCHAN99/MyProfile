@@ -1,6 +1,13 @@
+"use client";
+
 import MottoTypingWindow from "./MottoTypingWindow";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
 
 export default function About() {
+  const { language } = useLanguage();
+  const t = translations[language].about;
+
   return (
     <section id="about" className="bg-page-alt">
       <div className="container mx-auto px-4 pt-8">
@@ -8,7 +15,7 @@ export default function About() {
           {/* Code editor window - typing motto */}
           <div className="lg:w-1/2 w-full">
             <p className="text-primary font-semibold mb-4 tracking-wider lg:hidden">
-              -- About
+              {t.label}
             </p>
             {/* TODO: ganti motto di bawah ini dengan motto Anda sendiri */}
             <MottoTypingWindow
@@ -20,15 +27,11 @@ export default function About() {
           {/* Content */}
           <div className="lg:w-1/2">
             <p className="text-primary font-semibold mb-4 tracking-wider hidden lg:block">
-              -- About
+              {t.label}
             </p>
             {/* TODO: ganti dengan cerita/keahlian Anda sendiri */}
             <p className="text-body mb-8 text-justify">
-              Software developer yang berfokus pada pengembangan aplikasi web
-              dan mobile. Memiliki pengalaman menggunakan JavaScript, React, dan
-              Flutter dalam berbagai proyek pribadi maupun akademik. Terbiasa
-              bekerja dalam tim, mempelajari teknologi baru, serta membangun
-              solusi yang fungsional dan mudah digunakan.
+              {t.description}
             </p>
           </div>
         </div>

@@ -13,12 +13,18 @@ import {
 } from "react-icons/fa";
 import { experiences } from "./Experience";
 import { ROW_1, ROW_2 } from "./Division";
+import { useLanguage } from "./LanguageProvider";
+import { translations } from "../lib/i18n";
+import type { Language } from "./LanguageProvider";
 
 const activities = [
   {
     id: "1",
     title: "MyProfile - Personal Portfolio",
-    description: "Website portofolio pribadi untuk menampilkan profil, pengalaman, keahlian, dan proyek yang pernah saya kerjakan.",
+    description: {
+      id: "Website portofolio pribadi untuk menampilkan profil, pengalaman, keahlian, dan proyek yang pernah saya kerjakan.",
+      en: "A personal portfolio website showcasing my profile, experience, skills, and past projects.",
+    },
     image_url: "/images/project-1.jpg",
     status: "active",
     category: "Portfolio Website",
@@ -29,7 +35,10 @@ const activities = [
   {
     id: "2",
     title: "Sistem Informasi Madrasah Diniyah Nurul Huda Kebondalem",
-    description: "Sistem informasi madrasah diniyah untuk membantu pengelolaan data siswa, kegiatan belajar, dan administrasi pendidikan.",
+    description: {
+      id: "Sistem informasi madrasah diniyah untuk membantu pengelolaan data siswa, kegiatan belajar, dan administrasi pendidikan.",
+      en: "An information system for an Islamic school, helping manage student data, learning activities, and academic administration.",
+    },
     image_url: "/images/project-2.jpg",
     status: "active",
     category: "Education System",
@@ -40,7 +49,10 @@ const activities = [
   {
     id: "3",
     title: "AgemasenBot",
-    description: "Chatbot multifungsi untuk mencari gambar anime, mengubah gambar, GIF, dan video menjadi stiker WhatsApp, serta mengunduh media dari berbagai platform.",
+    description: {
+      id: "Chatbot multifungsi untuk mencari gambar anime, mengubah gambar, GIF, dan video menjadi stiker WhatsApp, serta mengunduh media dari berbagai platform.",
+      en: "A multifunctional chatbot for finding anime images, converting images, GIFs, and videos into WhatsApp stickers, and downloading media from various platforms.",
+    },
     image_url: "/images/project-3.jpg",
     status: "active",
     category: "Chatbot & Automation",
@@ -51,7 +63,10 @@ const activities = [
   {
     id: "4",
     title: "Sampah Desa",
-    description: "Aplikasi pengelolaan sampah desa untuk mendata, memantau, dan membantu pengorganisasian aktivitas pengelolaan limbah.",
+    description: {
+      id: "Aplikasi pengelolaan sampah desa untuk mendata, memantau, dan membantu pengorganisasian aktivitas pengelolaan limbah.",
+      en: "A village waste management app for recording, monitoring, and organizing waste management activities.",
+    },
     image_url: "/images/project-4.jpg",
     status: "active",
     category: "Environmental Management",
@@ -62,7 +77,10 @@ const activities = [
   {
     id: "5",
     title: "Plant Monitoring",
-    description: "Aplikasi monitoring tanaman untuk memantau kondisi tanaman secara real-time dan membantu perawatan berdasarkan data yang tersedia.",
+    description: {
+      id: "Aplikasi monitoring tanaman untuk memantau kondisi tanaman secara real-time dan membantu perawatan berdasarkan data yang tersedia.",
+      en: "A plant monitoring app that tracks plant conditions in real time and helps with care based on the available data.",
+    },
     image_url: "/images/project-5.jpg",
     status: "active",
     category: "IoT & Monitoring",
@@ -73,7 +91,10 @@ const activities = [
   {
     id: "6",
     title: "Al-Khawarizmi Website",
-    description: "Website profil KSM Al-Khawarizmi untuk memperkenalkan kelompok studi mahasiswa Islam Jurusan Teknik Informatika, kegiatan, dan informasinya.",
+    description: {
+      id: "Website profil KSM Al-Khawarizmi untuk memperkenalkan kelompok studi mahasiswa Islam Jurusan Teknik Informatika, kegiatan, dan informasinya.",
+      en: "A profile website for KSM Al-Khawarizmi, introducing the Informatics Islamic student study group, its activities, and information.",
+    },
     image_url: "/images/project-7.jpg",
     status: "active",
     category: "Organization Website",
@@ -84,7 +105,10 @@ const activities = [
   {
     id: "7",
     title: "KanaApp",
-    description: "Aplikasi pembelajaran bahasa Jepang untuk membantu pengguna mempelajari dan berlatih huruf kana, yaitu hiragana dan katakana.",
+    description: {
+      id: "Aplikasi pembelajaran bahasa Jepang untuk membantu pengguna mempelajari dan berlatih huruf kana, yaitu hiragana dan katakana.",
+      en: "A Japanese language learning app that helps users study and practice kana characters — hiragana and katakana.",
+    },
     image_url: "/images/project-8.jpg",
     status: "active",
     category: "Learning Application",
@@ -95,7 +119,10 @@ const activities = [
   {
     id: "8",
     title: "Purewill",
-    description: "Aplikasi habit tracker untuk membantu pengguna membangun, mencatat, dan memantau kebiasaan positif secara konsisten.",
+    description: {
+      id: "Aplikasi habit tracker untuk membantu pengguna membangun, mencatat, dan memantau kebiasaan positif secara konsisten.",
+      en: "A habit tracker app that helps users build, log, and consistently monitor positive habits.",
+    },
     image_url: "/images/project-11.jpg",
     status: "active",
     category: "Productivity App",
@@ -106,7 +133,10 @@ const activities = [
   {
     id: "9",
     title: "Website Tour Mega",
-    description: "Website informasi dan promosi layanan tour dan travel untuk membantu memperkenalkan paket perjalanan Haji dan Umrah.",
+    description: {
+      id: "Website informasi dan promosi layanan tour dan travel untuk membantu memperkenalkan paket perjalanan Haji dan Umrah.",
+      en: "An informational and promotional website for a tour and travel service, showcasing Hajj and Umrah travel packages.",
+    },
     image_url: "/images/project-9.jpg",
     status: "active",
     category: "Travel Website",
@@ -123,24 +153,25 @@ const activeActivities = activities
 
 const technologyCount = ROW_1.length + ROW_2.length;
 
-// Angka mengikuti data yang ditampilkan di portfolio.
-const stats = [
-  {
-    number: `${activeActivities.length}`,
-    label: "Proyek Tercatat",
-    icon: <FaLaptopCode className="text-primary text-2xl" />,
-  },
-  {
-    number: `${experiences.length}`,
-    label: "Pengalaman Tercatat",
-    icon: <FaCalendar className="text-primary text-2xl" />,
-  },
-  {
-    number: `${technologyCount}`,
-    label: "Teknologi Dikuasai",
-    icon: <FaCode className="text-primary text-2xl" />,
-  },
-];
+function getStats(t: (typeof translations)[Language]["activity"]) {
+  return [
+    {
+      number: `${activeActivities.length}`,
+      label: t.statsProjects,
+      icon: <FaLaptopCode className="text-primary text-2xl" />,
+    },
+    {
+      number: `${experiences.length}`,
+      label: t.statsExperience,
+      icon: <FaCalendar className="text-primary text-2xl" />,
+    },
+    {
+      number: `${technologyCount}`,
+      label: t.statsTech,
+      icon: <FaCode className="text-primary text-2xl" />,
+    },
+  ];
+}
 
 function CountUpNumber({ value }: { value: string }) {
   const target = Number(value);
@@ -209,18 +240,20 @@ function CountUpNumber({ value }: { value: string }) {
 
 export default function Activity() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { language } = useLanguage();
+  const t = translations[language].activity;
+  const stats = getStats(t);
 
   return (
     <section id="project" className="py-16 bg-page">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-primary font-semibold mb-2 tracking-wider">
-            -- Proyek
+            {t.label}
           </p>
-          <h2 className="text-3xl font-semibold text-heading">Proyek Saya</h2>
+          <h2 className="text-3xl font-semibold text-heading">{t.title}</h2>
           <p className="text-muted mt-4 max-w-2xl mx-auto">
-            Beberapa proyek yang pernah saya kerjakan, baik proyek pribadi,
-            freelance, maupun profesional.
+            {t.subtitle}
           </p>
         </div>
 
@@ -248,7 +281,7 @@ export default function Activity() {
                           d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                         />
                       </svg>
-                      <p className="text-muted text-sm">Project thumbnail</p>
+                      <p className="text-muted text-sm">{t.thumbnailFallback}</p>
                     </div>
                     <Image
                       src={activity.image_url}
@@ -280,7 +313,7 @@ export default function Activity() {
                         {activity.title}
                       </h3>
                       <p className="text-body text-sm leading-relaxed line-clamp-3">
-                        {activity.description}
+                        {activity.description[language]}
                       </p>
                     </div>
 
@@ -298,11 +331,11 @@ export default function Activity() {
                             className="inline-flex items-center rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-dark"
                           >
                             <FaExternalLinkAlt className="mr-2 text-xs" />
-                            Demo
+                            {t.demo}
                           </a>
                         ) : (
                           <span className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm text-muted">
-                            Demo belum tersedia
+                            {t.demoUnavailable}
                           </span>
                         )}
                         {activity.github_url ? (
@@ -313,11 +346,11 @@ export default function Activity() {
                             className="inline-flex items-center rounded-lg border border-border-strong px-3 py-2 text-sm font-medium text-heading transition hover:border-primary hover:bg-surface-2"
                           >
                             <FaGithub className="mr-2 text-base" />
-                            GitHub
+                            {t.github}
                           </a>
                         ) : (
                           <span className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm text-muted">
-                            GitHub belum tersedia
+                            {t.githubUnavailable}
                           </span>
                         )}
                       </div>
@@ -335,7 +368,7 @@ export default function Activity() {
                 onClick={() => setIsExpanded((expanded) => !expanded)}
                 className="bg-surface hover:bg-surface-2 text-heading font-medium py-3 px-6 rounded-lg border border-border-strong hover:border-primary transition duration-300"
               >
-                {isExpanded ? "Tampilkan Lebih Sedikit" : "Lihat Semua Proyek"}
+                {isExpanded ? t.showLess : t.showAll}
               </button>
             </div>
           )}
@@ -344,10 +377,10 @@ export default function Activity() {
           <div className="mt-16 pt-8 border-t border-border-subtle">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-semibold text-heading mb-2">
-                Pencapaian Saya
+                {t.achievementsTitle}
               </h3>
               <p className="text-muted">
-                Perjalanan dan pencapaian saya dalam angka
+                {t.achievementsSubtitle}
               </p>
             </div>
 
@@ -384,18 +417,17 @@ export default function Activity() {
           <div className="mt-12 text-center">
             <div className="bg-linear-to-r from-primary/20 to-primary/10 border border-primary/30 rounded-lg p-6 md:p-8 max-w-3xl mx-auto">
               <h3 className="text-xl md:text-2xl font-semibold text-heading mb-3 md:mb-4">
-                Tertarik Berkolaborasi?
+                {t.ctaTitle}
               </h3>
               <p className="text-body mb-4 md:mb-6 text-sm md:text-base">
-                Punya proyek menarik atau ingin bekerja sama? Jangan ragu
-                untuk menghubungi saya.
+                {t.ctaSubtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                 <Link
                   href="#contact"
                   className="bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-lg shadow hover:shadow-md transition duration-300 text-center"
                 >
-                  Hubungi Saya
+                  {t.ctaContact}
                 </Link>
                 <a
                   href="https://wa.me/6285656305716"
@@ -403,7 +435,7 @@ export default function Activity() {
                   rel="noopener noreferrer"
                   className="bg-surface hover:bg-surface-2 text-heading font-medium py-3 px-6 rounded-lg border border-border-strong hover:border-subtle transition duration-300 text-center"
                 >
-                  Chat via WhatsApp
+                  {t.ctaWhatsapp}
                 </a>
               </div>
             </div>
