@@ -312,7 +312,7 @@ export default function Division() {
           <span className="h-px w-6 bg-cyan-400/50" />
         </p>
         <h2 className="text-3xl font-bold tracking-wide text-heading md:text-4xl">
-          Arsenal Teknologi
+           Jelajahi Teknologi di Balik Project Saya
         </h2>
         <p className="mx-auto mt-3 max-w-md text-xs tracking-widest text-muted md:text-sm">
           PILIH SATU UNIT UNTUK MELIHAT DETAIL TEKNIS
