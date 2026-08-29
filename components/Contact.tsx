@@ -402,7 +402,7 @@ export default function Contact() {
                     {t.locationLabel}
                   </h4>
                   <p className="text-body">
-                    Sleman, Daerah Istimewa Yogyakarta, Indonesia
+                    Ngaglik ,Sleman, Daerah Istimewa Yogyakarta, Indonesia
                   </p>
                 </div>
               </div>
@@ -436,7 +436,11 @@ export default function Contact() {
               </div>
 
               <div className="pt-8">
-                <a href="/assets/CV-NamaAnda.pdf" target="_blank" className="inline-flex items-center text-primary font-medium hover:text-primary-light transition duration-300">
+                <a
+                  href="/doc/MyCV.pdf"
+                  download="Zhofir_CV.pdf"
+                  className="inline-flex items-center text-primary font-medium hover:text-primary-light transition duration-300"
+                >
                   {t.downloadCv}
                   <FaArrowRight className="ml-2" />
                 </a>
