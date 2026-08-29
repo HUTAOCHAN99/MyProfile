@@ -31,9 +31,6 @@ import { LuX, LuExternalLink } from 'react-icons/lu'
 import { useLanguage } from './LanguageProvider'
 import { translations } from '../lib/i18n'
 
-// ============================================================================
-// DATA — daftar teknologi. Tambah / ubah / hapus item di sini.
-// ============================================================================
 type Tech = {
   id: string
   name: string
@@ -244,9 +241,6 @@ type SelectPayload = {
   rect: OriginRect
 }
 
-// ============================================================================
-// MAIN COMPONENT
-// ============================================================================
 export default function Division() {
   const { language } = useLanguage()
   const t = translations[language].division
@@ -266,16 +260,9 @@ export default function Division() {
 
   const handleClose = useCallback(() => {
     setSelected(null)
-    // origin / activeInstance / pausedRow dibersihkan setelah animasi exit selesai
-    // (lihat onExitComplete di AnimatePresence) supaya logo "kembali" mulus
-    // ke posisi marquee sebelum item aslinya ditampilkan lagi.
     triggerRef.current?.focus()
   }, [])
 
-  // ESC untuk menutup + lock scroll (html & body) selama panel terbuka.
-  // Pakai teknik "freeze" posisi scroll (bukan cuma overflow:hidden) supaya
-  // beberapa browser/perangkat gak tetap bisa scroll halaman di belakang
-  // backdrop, dan kompensasi lebar scrollbar biar layout gak geser.
   useEffect(() => {
     if (!selected) return
 
@@ -316,11 +303,6 @@ export default function Division() {
       document.body.style.overflow = previous.bodyOverflow
       document.body.style.paddingRight = previous.bodyPaddingRight
 
-      // Kembalikan posisi scroll persis seperti sebelum panel dibuka.
-      // Non-aktifkan `scroll-smooth` (class di <html>, lihat app/layout.tsx)
-      // SEMENTARA khusus untuk scrollTo ini, supaya restore-nya instan/snap.
-      // Tanpa ini, browser menganimasikan scroll dari 0 -> scrollY sehingga
-      // terlihat seperti "efek scroll dari atas" padahal cuma balik ke posisi semula.
       const htmlEl = document.documentElement
       const prevScrollBehavior = htmlEl.style.scrollBehavior
       htmlEl.style.scrollBehavior = 'auto'
@@ -334,11 +316,9 @@ export default function Division() {
       id="skills"
       className="relative overflow-hidden bg-page py-24 md:py-32"
     >
-      {/* background grid + subtle vignette */}
       <div className="tech-hud-grid pointer-events-none absolute inset-0 z-0" />
       <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-page via-transparent to-page" />
 
-      {/* heading */}
       <div className="relative z-10 mb-16 px-4 text-center md:mb-20">
         <p className="mb-2 flex items-center justify-center gap-2 text-xs font-semibold tracking-[0.35em] text-cyan-400/80">
           <span className="h-px w-6 bg-cyan-400/50" />
@@ -353,7 +333,6 @@ export default function Division() {
         </p>
       </div>
 
-      {/* marquee rows */}
       <div className="relative z-10 flex flex-col gap-6 md:gap-8">
         <MarqueeRow
           techs={ROW_1}
@@ -400,9 +379,6 @@ export default function Division() {
   )
 }
 
-// ============================================================================
-// MARQUEE ROW — dua set item digandakan untuk loop tak-terlihat sambungannya
-// ============================================================================
 function MarqueeRow({
   techs,
   direction,
@@ -424,7 +400,6 @@ function MarqueeRow({
 
   return (
     <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden">
-      {/* edge fade agar logo terlihat "menghilang" di tepi layar — pakai var(--color-page) supaya ikut tema light/dark */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-40"
         style={{ background: 'linear-gradient(to right, var(--color-page), transparent)' }}
@@ -469,9 +444,6 @@ function MarqueeRow({
   )
 }
 
-// ============================================================================
-// MARQUEE ITEM — kartu teknologi yang bisa diklik di dalam marquee
-// ============================================================================
 function MarqueeItem({
   tech,
   isHidden,
@@ -540,9 +512,6 @@ function MarqueeItem({
   )
 }
 
-// ============================================================================
-// DETAIL OVERLAY — logo terbang ke tengah (FLIP, transform-based) + panel info
-// ============================================================================
 function TechDetailOverlay({
   tech,
   origin,
@@ -573,7 +542,6 @@ function TechDetailOverlay({
     return () => window.removeEventListener('resize', compute)
   }, [])
 
-  // Portal target hanya tersedia di client — hindari mismatch SSR.
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -588,15 +556,8 @@ function TechDetailOverlay({
 
   const flipTransition = { type: 'spring' as const, stiffness: 180, damping: 24, mass: 0.9 }
 
-  // Di-portal langsung ke <body> supaya `position: fixed` SELALU relatif ke
-  // viewport asli (selalu 100vh penuh, di mana pun section ini di-scroll),
-  // dan tidak "terjebak" jadi relatif ke ancestor manapun yang punya
-  // transform/will-change aktif (mis. wrapper <Reveal> yang membungkus
-  // section ini — transform ancestor membuat containing block baru untuk
-  // descendant fixed, sehingga overlay jadi seolah cuma setinggi section).
   return createPortal(
     <>
-      {/* backdrop: dim + blur sisa halaman */}
       <motion.div
         className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md"
         initial={{ opacity: 0 }}
@@ -606,7 +567,6 @@ function TechDetailOverlay({
         onClick={onClose}
       />
 
-      {/* logo terbang dari posisi marquee menuju tengah (transform-only: x/y/scale) */}
       <motion.div
         className="fixed z-50"
         style={{

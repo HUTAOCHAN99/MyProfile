@@ -1,6 +1,4 @@
 // components/Reveal.tsx
-// Wrapper untuk transisi fade-in halus: dipicu saat elemen pertama kali
-// masuk viewport (termasuk saat load pertama jika sudah terlihat di layar).
 'use client'
 
 import { useEffect, useRef, useState, type ReactNode } from 'react'
@@ -8,7 +6,6 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 type RevealProps = {
   children: ReactNode
   className?: string
-  /** Delay transisi dalam ms, berguna untuk efek staggered antar elemen */
   delay?: number
 }
 
@@ -20,7 +17,6 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
     const node = ref.current
     if (!node) return
 
-    // Fallback jika IntersectionObserver tidak tersedia
     if (typeof IntersectionObserver === 'undefined') {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true)

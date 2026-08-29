@@ -4,7 +4,6 @@
 import { useLanguage } from "./LanguageProvider";
 import { translations } from "../lib/i18n";
 
-// Data pengalaman - TODO: tambah/ubah sesuai perjalanan Anda selanjutnya
 type ExperienceItem = {
   id: string;
   role: { id: string; en: string };
@@ -87,7 +86,6 @@ export default function Experience() {
     <section id="journey" className="min-h-screen py-16 md:py-20 flex items-center">
       <div className="container mx-auto px-4">
         <div className="timeline-container">
-          {/* Header - konsisten dengan pola section lain (mis. Proyek Saya) */}
           <div className="timeline-header">
             <p className="text-primary font-semibold mb-2 tracking-wider">
               {t.label}
@@ -100,7 +98,6 @@ export default function Experience() {
             </p>
           </div>
 
-          {/* Timeline list */}
           <div>
             {experiences.map((item) => {
               return (

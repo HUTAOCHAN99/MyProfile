@@ -28,7 +28,6 @@ interface ContactFormErrors {
   message?: string
 }
 
-// Alamat email pemilik website — tujuan dari semua pesan contact form.
 const OWNER_EMAIL = 'ahmadzhofir1808@gmail.com'
 
 type EmailPlatform = 'gmail' | 'outlook' | 'yahoo' | 'default'
@@ -46,13 +45,6 @@ const EMAIL_PLATFORMS: {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-/**
- * Membangun URL "compose" untuk masing-masing platform email dari data form.
- * Semua nilai di-encode dengan encodeURIComponent agar aman dimasukkan ke URL
- * (menangani spasi, newline, dan karakter non-English).
- * Tidak ada password/credential yang dikirim atau disimpan di sini — ini
- * hanya membuka halaman compose milik masing-masing penyedia email.
- */
 function buildComposeUrl(platform: EmailPlatform, data: ContactFormData): string {
   const subject = `Contact from ${data.name}`
   const body = `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
@@ -95,7 +87,6 @@ export default function Contact() {
       ...prev,
       [name]: value
     }))
-    // Hilangkan error field ini begitu user mulai memperbaikinya
     setErrors(prev => (prev[name as keyof ContactFormErrors] ? { ...prev, [name]: undefined } : prev))
   }
 
@@ -155,7 +146,6 @@ export default function Contact() {
     toast.success(t.toastOpening(platformLabel))
   }
 
-  // Tutup modal saat klik di luar dialog
   useEffect(() => {
     if (!isMenuOpen) return
 
@@ -174,8 +164,6 @@ export default function Contact() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isMenuOpen])
 
-  // Aksesibilitas keyboard: Escape menutup modal & mengembalikan fokus,
-  // ArrowUp/ArrowDown/Home/End navigasi antar pilihan.
   const handleMenuKeyDown = (e: React.KeyboardEvent) => {
     const items = menuItemRefs.current.filter(Boolean) as HTMLButtonElement[]
     const currentIndex = items.findIndex(item => item === document.activeElement)
@@ -311,7 +299,6 @@ export default function Contact() {
                 )}
               </div>
 
-              {/* Trigger + modal pilihan platform email */}
               <div className="relative">
                 <button
                   ref={triggerRef}
@@ -385,7 +372,6 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Contact Info - TODO: ganti dengan data kontak Anda sendiri */}
           <div className="lg:w-1/2">
             <h2 className="text-3xl font-semibold text-heading mb-8">
               {t.infoTitle}

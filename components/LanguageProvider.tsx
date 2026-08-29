@@ -23,8 +23,7 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
 const STORAGE_KEY = "language";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Default "id" di server & saat render pertama di client (menghindari
-  // mismatch hydration). Preferensi yang tersimpan dibaca setelah mount.
+
   const [language, setLanguageState] = useState<Language>("id");
 
   useEffect(() => {
@@ -35,7 +34,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         setLanguageState(stored);
       }
     } catch {
-      // ignore (mis. privacy mode)
     }
   }, []);
 
@@ -48,7 +46,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, lang);
     } catch {
-      // ignore
+
     }
   };
 

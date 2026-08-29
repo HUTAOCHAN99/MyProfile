@@ -3,14 +3,6 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "./ThemeProvider";
 
-/**
- * FuiBackground
- * Ambient, continuously-animated futuristic FUI/HUD background.
- * Layers (back -> front): grid -> drifting technical text/markers (3 depth layers)
- * -> radial vignette (keeps the center dark/uncluttered) -> scan sweep.
- * Pure canvas, no external assets. Respects prefers-reduced-motion.
- */
-
 type Frag = {
   text: string;
   x: number;
@@ -20,8 +12,8 @@ type Frag = {
   size: number;
   alpha: number;
   layer: number;
-  flicker: number; // per-fragment flicker phase
-  rotation: number; // slight tilt, in radians
+  flicker: number;
+  rotation: number; 
 };
 
 type Marker = {
@@ -32,7 +24,7 @@ type Marker = {
   vy: number;
   size: number;
   alpha: number;
-  val: number; // for progress bars
+  val: number; 
 };
 
 const HEX = "0123456789ABCDEF";
@@ -309,7 +301,6 @@ export default function FuiBackground({ className = "" }: { className?: string }
       ctx!.fillStyle = scanGrad;
       ctx!.fillRect(0, scanY - 40, width, 80);
 
-      // vignette: keep center clean & uncluttered, matching the page tone
       const vgRgb = isLight ? "243,245,248" : "6,7,9";
       const vg = ctx!.createRadialGradient(
         width / 2,
@@ -325,7 +316,6 @@ export default function FuiBackground({ className = "" }: { className?: string }
       ctx!.fillStyle = vg;
       ctx!.fillRect(0, 0, width, height);
 
-      // occasional subtle glitch band
       if (!reduceMotion) {
         glitchTimer -= 1;
         if (glitchTimer <= 0) {
@@ -349,7 +339,6 @@ export default function FuiBackground({ className = "" }: { className?: string }
     rafId = requestAnimationFrame(step);
 
     if (reduceMotion) {
-      // draw a single static frame, no loop
       cancelAnimationFrame(rafId);
       step(0);
     }
@@ -364,7 +353,6 @@ export default function FuiBackground({ className = "" }: { className?: string }
     <div className={`absolute inset-0 overflow-hidden pointer-events-none select-none ${className}`} aria-hidden="true">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      {/* CRT-style scanline texture */}
       <div
         className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
         style={{
@@ -373,7 +361,6 @@ export default function FuiBackground({ className = "" }: { className?: string }
         }}
       />
 
-      {/* fine grain */}
       <div
         className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
         style={{

@@ -6,19 +6,19 @@ import { useLanguage } from "./LanguageProvider";
 import { translations } from "../lib/i18n";
 
 interface MottoTypingWindowProps {
-  /** Nama file yang tampil di title bar & tab, mis. "motto.ts" */
+
   fileName?: string;
-  /** Motto yang akan diketik (tanpa tanda kutip) */
+
   motto: string;
-  /** Kecepatan mengetik per karakter (ms) */
+
   typingSpeed?: number;
-  /** Kecepatan menghapus per karakter (ms) */
+
   deletingSpeed?: number;
-  /** Jeda setelah selesai mengetik sebelum mulai menghapus (ms) */
+
   pauseAfterTyping?: number;
-  /** Jeda setelah selesai menghapus sebelum mengetik ulang (ms) */
+
   pauseBeforeRetyping?: number;
-  /** Ulangi animasi terus-menerus */
+
   loop?: boolean;
 }
 
@@ -63,7 +63,6 @@ export default function MottoTypingWindow({
       if (loop) {
         timeout = setTimeout(() => setPhase("deleting"), 0);
       }
-      // if not looping, stay paused forever (text stays fully typed)
     } else if (phase === "deleting") {
       if (text.length > 0) {
         timeout = setTimeout(() => {
@@ -81,7 +80,6 @@ export default function MottoTypingWindow({
 
   return (
     <div className="rounded-lg overflow-hidden shadow-xl border border-white/10 bg-[#1e1e1e] w-full">
-      {/* Windows-style title bar */}
       <div className="flex items-center justify-between bg-[#2b2b2b] px-3 py-2 select-none">
         <div className="flex items-center gap-2 min-w-0">
           <VscVscode className="text-[15px] leading-none text-[#23a8f2]" aria-label="Visual Studio Code" />

@@ -26,12 +26,11 @@ interface Person {
   introduction: { id: string; en: string };
 }
 
-// Data profil - TODO: ganti semua data di bawah ini dengan data Anda
 const person: Person = {
   id: 1,
-  name: "Ahmad Zhofir Amanullah Nayif", // TODO: ganti dengan nama Anda
+  name: "Ahmad Zhofir Amanullah Nayif",
   role: "Software Developer",
-  image: "/assets/Zhofir.webp", // TODO: ganti dengan foto Anda
+  image: "/assets/Zhofir.webp", 
   social: {
     github: "https://github.com/HUTAOCHAN99",
     instagram: "https://www.instagram.com/ahmad_zhofir_a_nayif",
@@ -66,7 +65,6 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 w-full"
           >
-            {/* Left Content - Photo dengan overlay di dalamnya */}
             <div className="relative w-full lg:w-1/2">
               <div className="relative max-w-md mx-auto lg:mx-0">
                 <div className="relative aspect-square">
@@ -123,7 +121,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Right Content - Description */}
             <div className="w-full lg:w-1/2 space-y-4">
               <p className="text-primary font-semibold text-sm tracking-wider">
                 {t.introLabel}

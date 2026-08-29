@@ -23,7 +23,7 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Social Links - ganti dengan akun Anda */}
+          {/* Social Links */}
           <div className="flex space-x-6 mb-6 md:mb-0">
             <a
               href="https://github.com/HUTAOCHAN99"
@@ -48,7 +48,6 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Copyright - ganti dengan nama Anda */}
           <div className="text-center md:text-right">
             <p className="text-muted text-sm">
               {t.copyright}

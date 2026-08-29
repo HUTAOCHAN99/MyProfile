@@ -6,19 +6,16 @@ import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "./LanguageProvider";
 import { translations } from "../lib/i18n";
 
-// Custom hook untuk mengelola mobile menu
 const useMobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   
   const openMenu = () => {
-    // Simpan posisi scroll saat ini
     setScrollPosition(window.pageYOffset);
     setIsMenuOpen(true);
     document.body.classList.add("overflow-hidden");
     
-    // Lock scroll position
     document.body.style.top = `-${window.pageYOffset}px`;
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
@@ -28,13 +25,11 @@ const useMobileMenu = () => {
     setIsMenuOpen(false);
     document.body.classList.remove("overflow-hidden");
     
-    // Restore scroll position
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
     window.scrollTo(0, scrollPosition);
     
-    // Reset hamburger button state
     const hamburgerBtn = document.getElementById('humberger');
     if (hamburgerBtn) {
       hamburgerBtn.setAttribute('aria-expanded', 'false');
@@ -51,20 +46,15 @@ const useMobileMenu = () => {
   
   const handleMenuLinkClick = (href: string) => {
     closeMenu();
-    
-    // Delay untuk memastikan menu tertutup sebelum scroll
+ 
     setTimeout(() => {
       if (href.startsWith('#')) {
         const element = document.querySelector(href);
         if (element) {
-          const headerHeight = 80; // Sesuaikan dengan tinggi header
+          const headerHeight = 80; 
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
-          // Langsung scroll smooth ke posisi target — headerHeight sudah
-          // dikompensasi lewat offsetPosition di atas, jadi tidak perlu lagi
-          // "scroll ke atas dulu" sebelum scroll ke target (itu penyebab
-          // efek "naik dulu baru turun" saat klik link Kontak).
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
@@ -98,7 +88,6 @@ export default function Header() {
   const { language } = useLanguage();
   const t = translations[language].header;
 
-  // Handle scroll untuk header
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector("header");
@@ -113,17 +102,14 @@ export default function Header() {
       }
     };
 
-    // Inisialisasi state header
     handleScroll();
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Navigation items - sesuaikan label & href dengan section yang Anda pakai
   const navItems = [
     { name: t.nav.home, href: "#home" },
     { name: t.nav.about, href: "#about" },
@@ -133,7 +119,6 @@ export default function Header() {
     { name: t.nav.contact, href: "#contact" },
   ];
 
-  // Handle escape key untuk menutup menu
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMenuOpen) {
@@ -277,13 +262,12 @@ export default function Header() {
               </li>
             ))}
 
-            {/* Social Media Links in Mobile Menu - ganti dengan akun Anda */}
             <li className="pt-8 mt-8 border-t border-border-subtle">
               <div className="px-4">
                 <p className="text-muted text-sm mb-4">{t.followMe}</p>
                 <div className="flex space-x-4">
                   <a
-                    href="https://github.com/username"
+                    href="https://github.com/HUTAOCHAN99"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-body hover:text-heading p-2 hover:bg-surface rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -298,7 +282,7 @@ export default function Header() {
                     </svg>
                   </a>
                   <a
-                    href="https://www.instagram.com/username"
+                    href="https://www.instagram.com/ahmad_zhofir_a_nayif"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-body hover:text-heading p-2 hover:bg-surface rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-primary"

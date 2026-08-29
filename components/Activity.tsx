@@ -146,7 +146,6 @@ const activities = [
   },
 ];
 
-// Filter aktivitas aktif dan urutkan berdasarkan order_index
 const activeActivities = activities
   .filter(activity => activity.status === "active")
   .sort((a, b) => a.order_index - b.order_index);

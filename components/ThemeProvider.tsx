@@ -19,9 +19,6 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const STORAGE_KEY = "theme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Dark is the default/base theme (matches Hero). We read the real value
-  // on mount because the blocking script in <head> may have already applied
-  // the "light" class before React hydrates.
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof document === "undefined") return "dark";
     return document.documentElement.classList.contains("light") ? "light" : "dark";
@@ -34,7 +31,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       try {
         window.localStorage.setItem(STORAGE_KEY, next);
       } catch {
-        // ignore (e.g. privacy mode)
       }
       return next;
     });
@@ -55,7 +51,6 @@ export function useTheme() {
   return ctx;
 }
 
-/** Inline script string, injected before hydration to avoid a theme flash. */
 export const themeInitScript = `
 (function () {
   try {

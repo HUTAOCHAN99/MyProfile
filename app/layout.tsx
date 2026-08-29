@@ -7,7 +7,6 @@ import { CustomCursor } from '../components/CustomCursor'
 
 const inter = Inter({ subsets: ['latin'] })
 
-// TODO: ganti title & description sesuai identitas Anda
 export const metadata = {
   title: 'AZAN DEV',
   description: 'Portfolio pribadi Zhofir - Software Developer',
@@ -27,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Runs before paint so a saved "light" preference doesn't flash dark first */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.className} bg-page text-body`} suppressHydrationWarning>
