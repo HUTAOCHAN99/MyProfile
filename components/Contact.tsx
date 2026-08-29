@@ -437,7 +437,7 @@ export default function Contact() {
 
               <div className="pt-8">
                 <a
-                  href="/doc/MyCV.pdf"
+                  href="/doc/Zhofir_CV.pdf"
                   download="Zhofir_CV.pdf"
                   className="inline-flex items-center text-primary font-medium hover:text-primary-light transition duration-300"
                 >
