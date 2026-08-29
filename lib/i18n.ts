@@ -96,7 +96,7 @@ export const translations = {
       downloadCv: "Download CV",
     },
     footer: {
-      role: "Fullstack Developer",
+      role: "Software Developer",
       copyright: "Copyright © 2026 AZAN DEV. All rights reserved.",
     },
   },
@@ -193,7 +193,7 @@ export const translations = {
       downloadCv: "Download CV",
     },
     footer: {
-      role: "Fullstack Developer",
+      role: "Software Developer",
       copyright: "Copyright © 2026 AZAN DEV. All rights reserved.",
     },
   },

@@ -30,7 +30,7 @@ interface Person {
 const person: Person = {
   id: 1,
   name: "Ahmad Zhofir Amanullah Nayif", // TODO: ganti dengan nama Anda
-  role: "Fullstack Developer",
+  role: "Software Developer",
   image: "/assets/Zhofir.webp", // TODO: ganti dengan foto Anda
   social: {
     github: "https://github.com/HUTAOCHAN99",
@@ -38,12 +38,12 @@ const person: Person = {
     linkedin: "https://www.linkedin.com/in/username",
   },
   bio: {
-    id: "Fullstack Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Flutter",
-    en: "Fullstack Developer experienced in building modern web apps with Next.js, React, and Flutter",
+    id: "Software Developer dengan pengalaman dalam pengembangan web modern menggunakan Next.js, React, dan Flutter",
+    en: "Software Developer experienced in building modern web apps with Next.js, React, and Flutter",
   },
   introduction: {
-    id: "Sebagai seorang Fullstack Developer, saya memadukan logika backend yang solid dengan antarmuka yang intuitif untuk menciptakan aplikasi web dan mobile yang berpusat pada kepuasan pengguna.",
-    en: "As a Fullstack Developer, I combine solid backend logic with intuitive interfaces to build web and mobile apps that put the user's experience first.",
+    id: "Sebagai seorang Software Developer, saya memadukan logika backend yang solid dengan antarmuka yang intuitif untuk menciptakan aplikasi web dan mobile yang berpusat pada kepuasan pengguna.",
+    en: "As a Software Developer, I combine solid backend logic with intuitive interfaces to build web and mobile apps that put the user's experience first.",
   },
 };
 
